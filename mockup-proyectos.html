@@ -1,569 +1,1054 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<script>
-(function () {
-  var loc = window.location;
-  var baseHref;
-  if (loc.protocol === "file:") {
-    var href = loc.href.replace(/[?#].*$/, "");
-    var last = Math.max(href.lastIndexOf("/"), href.lastIndexOf("\\"));
-    baseHref = last >= 0 ? href.slice(0, last + 1) : href;
-  } else {
-    var path = loc.pathname;
-    if (/\.html?$/i.test(path)) {
-      baseHref = loc.origin + path.replace(/[^/]+$/, "");
-    } else if (path.endsWith("/")) {
-      baseHref = loc.origin + path;
-    } else {
-      baseHref = loc.origin + path + "/";
-    }
-  }
-  var b = document.createElement("base");
-  b.href = baseHref;
-  document.head.insertBefore(b, document.head.firstChild);
-})();
-</script>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-tertiary-fixed-variant": "#693c00",
-                        "outline-variant": "#c0c7d3",
-                        "background": "#f8f9ff",
-                        "surface-container-high": "#e6e8ef",
-                        "inverse-primary": "#a1c9ff",
-                        "on-background": "#181c21",
-                        "on-tertiary-fixed": "#2c1600",
-                        "secondary": "#5f5f58",
-                        "on-error": "#ffffff",
-                        "surface-dim": "#d8dae1",
-                        "on-surface-variant": "#414751",
-                        "surface-container-low": "#f1f3fb",
-                        "on-tertiary": "#ffffff",
-                        "secondary-container": "#e2e0d7",
-                        "on-secondary-fixed": "#1c1c17",
-                        "surface-container-highest": "#e0e2ea",
-                        "secondary-fixed": "#e5e2da",
-                        "on-primary-fixed": "#001c38",
-                        "surface-container": "#eceef5",
-                        "on-secondary": "#ffffff",
-                        "on-primary-fixed-variant": "#004880",
-                        "inverse-surface": "#2d3136",
-                        "tertiary-fixed": "#ffdcbd",
-                        "on-primary-container": "#fdfcff",
-                        "primary-fixed": "#d2e4ff",
-                        "on-error-container": "#93000a",
-                        "tertiary": "#874f00",
-                        "on-secondary-container": "#63635c",
-                        "surface-container-lowest": "#ffffff",
-                        "primary-container": "#1777c9",
-                        "error-container": "#ffdad6",
-                        "on-surface": "#181c21",
-                        "surface": "#f8f9ff",
-                        "outline": "#717783",
-                        "inverse-on-surface": "#eff0f8",
-                        "secondary-fixed-dim": "#c8c6bf",
-                        "on-secondary-fixed-variant": "#474741",
-                        "surface-tint": "#0060a8",
-                        "on-tertiary-container": "#fffbff",
-                        "tertiary-fixed-dim": "#ffb86f",
-                        "primary": "#005ea4",
-                        "surface-variant": "#e0e2ea",
-                        "surface-bright": "#f8f9ff",
-                        "tertiary-container": "#a96400",
-                        "on-primary": "#ffffff",
-                        "error": "#ba1a1a",
-                        "primary-fixed-dim": "#a1c9ff"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "sm": "8px",
-                        "gutter": "20px",
-                        "lg": "24px",
-                        "unit": "4px",
-                        "xl": "32px",
-                        "md": "16px",
-                        "xs": "4px",
-                        "margin": "24px"
-                    },
-                    "fontFamily": {
-                        "body-lg": ["Inter"],
-                        "body-md": ["Inter"],
-                        "h3": ["Inter"],
-                        "h1": ["Inter"],
-                        "data-num": ["Inter"],
-                        "h2": ["Inter"],
-                        "label-md": ["Inter"]
-                    },
-                    "fontSize": {
-                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                        "h3": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-                        "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
-                        "data-num": ["28px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
-                    }
-                },
-            },
+<!doctype html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script>
+      (function () {
+        var loc = window.location;
+        var baseHref;
+        if (loc.protocol === "file:") {
+          var href = loc.href.replace(/[?#].*$/, "");
+          var last = Math.max(href.lastIndexOf("/"), href.lastIndexOf("\\"));
+          baseHref = last >= 0 ? href.slice(0, last + 1) : href;
+        } else {
+          var path = loc.pathname;
+          if (/\.html?$/i.test(path)) {
+            baseHref = loc.origin + path.replace(/[^/]+$/, "");
+          } else if (path.endsWith("/")) {
+            baseHref = loc.origin + path;
+          } else {
+            baseHref = loc.origin + path + "/";
+          }
         }
+        var b = document.createElement("base");
+        b.href = baseHref;
+        document.head.insertBefore(b, document.head.firstChild);
+      })();
     </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed-variant": "#693c00",
+              "outline-variant": "#c0c7d3",
+              background: "#f8f9ff",
+              "surface-container-high": "#e6e8ef",
+              "inverse-primary": "#a1c9ff",
+              "on-background": "#181c21",
+              "on-tertiary-fixed": "#2c1600",
+              secondary: "#5f5f58",
+              "on-error": "#ffffff",
+              "surface-dim": "#d8dae1",
+              "on-surface-variant": "#414751",
+              "surface-container-low": "#f1f3fb",
+              "on-tertiary": "#ffffff",
+              "secondary-container": "#e2e0d7",
+              "on-secondary-fixed": "#1c1c17",
+              "surface-container-highest": "#e0e2ea",
+              "secondary-fixed": "#e5e2da",
+              "on-primary-fixed": "#001c38",
+              "surface-container": "#eceef5",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#004880",
+              "inverse-surface": "#2d3136",
+              "tertiary-fixed": "#ffdcbd",
+              "on-primary-container": "#fdfcff",
+              "primary-fixed": "#d2e4ff",
+              "on-error-container": "#93000a",
+              tertiary: "#874f00",
+              "on-secondary-container": "#63635c",
+              "surface-container-lowest": "#ffffff",
+              "primary-container": "#1777c9",
+              "error-container": "#ffdad6",
+              "on-surface": "#181c21",
+              surface: "#f8f9ff",
+              outline: "#717783",
+              "inverse-on-surface": "#eff0f8",
+              "secondary-fixed-dim": "#c8c6bf",
+              "on-secondary-fixed-variant": "#474741",
+              "surface-tint": "#0060a8",
+              "on-tertiary-container": "#fffbff",
+              "tertiary-fixed-dim": "#ffb86f",
+              primary: "#005ea4",
+              "surface-variant": "#e0e2ea",
+              "surface-bright": "#f8f9ff",
+              "tertiary-container": "#a96400",
+              "on-primary": "#ffffff",
+              error: "#ba1a1a",
+              "primary-fixed-dim": "#a1c9ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              sm: "8px",
+              gutter: "20px",
+              lg: "24px",
+              unit: "4px",
+              xl: "32px",
+              md: "16px",
+              xs: "4px",
+              margin: "24px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "body-md": ["Inter"],
+              h3: ["Inter"],
+              h1: ["Inter"],
+              "data-num": ["Inter"],
+              h2: ["Inter"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              h3: ["20px", { lineHeight: "28px", fontWeight: "600" }],
+              h1: [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "data-num": [
+                "28px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              h2: [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8f9ff;
+      }
+      .tab-panel {
+        display: none;
+      }
+      .tab-panel.is-active {
+        display: block;
+      }
+      .toast-enter {
+        animation: toastIn 0.28s ease-out;
+      }
+      @keyframes toastIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
         }
-        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
-        .tab-panel { display: none; }
-        .tab-panel.is-active { display: block; }
-        .toast-enter { animation: toastIn 0.28s ease-out; }
-        @keyframes toastIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        .gantt-phase { cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
-        .gantt-phase:hover { transform: scaleY(1.08); box-shadow: 0 2px 8px rgba(0,94,164,0.15); }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .gantt-phase {
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .gantt-phase:hover {
+        transform: scaleY(1.08);
+        box-shadow: 0 2px 8px rgba(0, 94, 164, 0.15);
+      }
     </style>
-</head>
-<body class="text-on-background bg-background">
-<!-- TopNavBar -->
-<header class="bg-white dark:bg-slate-900 font-['Inter'] antialiased tracking-tight docked full-width top-0 border-b border-slate-200 dark:border-slate-800 flat no shadows flex justify-between items-center px-8 h-16 w-full sticky z-50">
-<div class="flex items-center gap-xl">
-<span class="text-lg font-bold text-slate-900 dark:text-slate-50">Portal PMO — Polpaico</span>
-<nav class="relative z-10 flex items-center gap-lg h-16">
-<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-800 dark:hover:text-slate-200 h-full flex items-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-200" href="mockup-resumen.html">Resumen</a>
-<a class="text-[#378ADD] dark:text-blue-400 border-b-2 border-[#378ADD] dark:border-blue-400 font-semibold h-full flex items-center" href="mockup-proyectos.html">Proyectos</a>
-</nav>
-</div>
-<div class="flex items-center gap-md">
-<button class="p-sm text-slate-500 hover:bg-slate-50 transition-colors active:scale-95 duration-150">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="p-sm text-slate-500 hover:bg-slate-50 transition-colors active:scale-95 duration-150">
-<span class="material-symbols-outlined">settings</span>
-</button>
-<button class="p-sm text-slate-500 hover:bg-slate-50 transition-colors active:scale-95 duration-150">
-<span class="material-symbols-outlined">account_circle</span>
-</button>
-</div>
-</header>
-<main class="max-w-[1440px] mx-auto px-margin py-lg space-y-lg">
-<!-- Breadcrumb & Header Actions -->
-<div class="flex flex-col gap-sm">
-<nav class="flex items-center gap-xs text-label-md font-label-md text-outline">
-<a class="hover:text-primary cursor-pointer text-inherit no-underline" href="mockup-resumen.html">Resumen general</a>
-<span class="material-symbols-outlined text-[14px]">chevron_right</span>
-<span class="text-on-surface">PM-01</span>
-</nav>
-<div class="flex justify-between items-start">
-<div class="space-y-xs">
-<div class="flex items-center gap-md">
-<h1 class="font-h1 text-h1 text-on-surface">Agente Contingencia Laboral</h1>
-<span class="bg-primary/10 text-primary px-sm py-1 rounded-full text-label-md font-label-md">En curso</span>
-<span class="bg-error-container text-on-error-container px-sm py-1 rounded-full text-label-md font-label-md flex items-center gap-1">
-<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: &quot;FILL&quot; 1;">priority_high</span>
-                            Alta
-                        </span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant">Optimización de stocks y logística mediante modelos de aprendizaje automático.</p>
-</div>
-<button id="btn-jira" type="button" class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md flex items-center gap-sm active:scale-95 transition-transform">
-                    Ver en Jira
-                    <span class="material-symbols-outlined text-lg">open_in_new</span>
-</button>
-</div>
-</div>
-<!-- Main Dashboard Layout -->
-<div class="grid grid-cols-10 gap-gutter">
-<!-- Left Column (70%) -->
-<div class="col-span-7 space-y-lg">
-<!-- KPI Value Progress Cards -->
-<div class="grid grid-cols-3 gap-gutter">
-<div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
-<p class="font-label-md text-label-md text-outline uppercase tracking-wider mb-sm">Valor esperado</p>
-<div class="flex items-baseline gap-xs">
-<span id="kpi-esperado" class="font-data-num text-data-num text-on-surface">$3.2M</span>
-<span class="text-label-md font-label-md text-outline">USD</span>
-</div>
-<div class="mt-md h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div id="kpi-esperado-bar" class="h-full bg-primary transition-all duration-700" style="width: 100%"></div>
-</div>
-</div>
-<div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
-<p class="font-label-md text-label-md text-outline uppercase tracking-wider mb-sm">Valor capturado</p>
-<div class="flex items-baseline gap-xs">
-<span id="kpi-capturado" class="font-data-num text-data-num text-on-surface">$1.8M</span>
-<span class="text-label-md font-label-md text-outline">USD</span>
-</div>
-<div class="mt-md h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div id="kpi-capturado-bar" class="h-full bg-tertiary-container transition-all duration-700" style="width: 56%"></div>
-</div>
-</div>
-<div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
-<p class="font-label-md text-label-md text-outline uppercase tracking-wider mb-sm">JEQ</p>
-<div class="flex items-baseline gap-xs">
-<span id="kpi-jeq" class="font-data-num text-data-num text-on-surface">140</span>
-</div>
-<div class="mt-md h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div id="kpi-jeq-bar" class="h-full bg-primary transition-all duration-700" style="width: 60%"></div>
-</div>
-</div>
-</div>
-<div class="flex justify-end">
-<button type="button" id="btn-kpi-demo" class="text-label-md text-primary hover:underline font-medium">Simular variación de métricas (demo)</button>
-</div>
-<!-- Project Timeline -->
-<div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
-<h3 class="font-h3 text-h3 text-on-surface mb-lg">Cronograma de Fases</h3>
-<div class="relative pt-xs">
-<div class="flex items-center justify-between text-label-md font-label-md text-outline mb-xs px-2">
-<span class="">Q1 2024</span>
-<span class="">Q2 2024</span>
-<span class="">Q3 2024</span>
-<span class="">Q4 2024</span>
-</div>
-<div class="space-y-4">
-<!-- Gantt Row Item -->
-<div class="grid grid-cols-6 h-8 items-center relative">
-<div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="gantt-phase z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-1 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center px-3" title="Ideación — 15 Ene – 28 Feb 2026 (cerrada)" data-phase="Ideación">
-<span class="text-[10px] font-bold text-on-tertiary-fixed-variant truncate">Ideación</span>
-</div>
-</div>
-<div class="grid grid-cols-6 h-8 items-center relative">
-<div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="gantt-phase z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-2 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center px-3" title="Planificación — 1 Mar – 20 Mar 2026 (cerrada)" data-phase="Planificación">
-<span class="text-[10px] font-bold text-on-tertiary-fixed-variant truncate">Planificación</span>
-</div>
-</div>
-<div class="grid grid-cols-6 h-8 items-center relative">
-<div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="gantt-phase z-10 bg-primary/20 h-4 rounded-full col-start-3 col-span-1 border border-primary/40 flex items-center px-3" title="Diseño — 21 Mar – 10 Abr 2026 (cerrada)" data-phase="Diseño">
-<span class="text-[10px] font-bold text-primary truncate">Diseño</span>
-</div>
-</div>
-<div class="grid grid-cols-6 h-8 items-center relative">
-<div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<!-- Current Phase Marker -->
-<div class="gantt-phase z-10 bg-primary h-6 rounded-full col-start-4 col-span-1 shadow-md border border-white flex items-center px-3 ring-4 ring-primary/10" title="Desarrollo — 11 Abr – 30 May 2026 (en curso, 62% avance)" data-phase="Desarrollo">
-<span class="text-[10px] font-bold text-white truncate">Desarrollo (Actual)</span>
-</div>
-</div>
-<div class="grid grid-cols-6 h-8 items-center relative opacity-50">
-<div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="gantt-phase z-10 bg-outline-variant h-4 rounded-full col-start-5 col-span-1 flex items-center px-3" title="QA — 1 Jun – 20 Jun 2026 (planificada)" data-phase="QA">
-<span class="text-[10px] font-bold text-on-surface-variant truncate">QA</span>
-</div>
-</div>
-<div class="grid grid-cols-6 h-8 items-center relative opacity-50">
-<div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="gantt-phase z-10 bg-outline-variant h-4 rounded-full col-start-6 col-span-1 flex items-center px-3" title="Despliegue — 21 Jun – 5 Jul 2026 (planificada)" data-phase="Despliegue">
-<span class="text-[10px] font-bold text-on-surface-variant truncate">Despliegue</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Epics & Sprint Progress Tabs -->
-<div class="bg-white border border-outline-variant rounded-lg shadow-sm overflow-hidden">
-<div id="project-tabs" class="flex border-b border-outline-variant" role="tablist">
-<button type="button" role="tab" aria-selected="true" data-tab="epicas" class="proj-tab px-lg py-md text-primary border-b-2 border-primary font-semibold text-body-md">Épicas</button>
-<button type="button" role="tab" aria-selected="false" data-tab="sprint" class="proj-tab px-lg py-md text-on-surface-variant hover:text-on-surface font-medium text-body-md border-b-2 border-transparent">Sprint Activo</button>
-<button type="button" role="tab" aria-selected="false" data-tab="tecnicos" class="proj-tab px-lg py-md text-on-surface-variant hover:text-on-surface font-medium text-body-md border-b-2 border-transparent">Detalles Técnicos</button>
-</div>
-<div id="panel-epicas" class="tab-panel is-active p-lg space-y-md" role="tabpanel">
-<div class="space-y-lg">
-<div>
-<div class="flex justify-between items-center mb-sm">
-<div class="flex items-center gap-sm">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">dataset</span>
-<span class="font-body-md font-semibold text-on-surface">Archivos</span>
-</div>
-<span id="epic-archivos-pct" class="text-label-md font-label-md text-outline">100%</span>
-</div>
-<div class="h-2 w-full bg-surface-container rounded-full">
-<div id="epic-archivos-bar" class="h-full bg-primary transition-all duration-500" style="width: 100%"></div>
-</div>
-</div>
-<div>
-<div class="flex justify-between items-center mb-sm">
-<div class="flex items-center gap-sm">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">insights</span>
-<span class="font-body-md font-semibold text-on-surface">Chat investigador</span>
-</div>
-<span id="epic-chat-pct" class="text-label-md font-label-md text-outline">65%</span>
-</div>
-<div class="h-2 w-full bg-surface-container rounded-full">
-<div id="epic-chat-bar" class="h-full bg-primary transition-all duration-500" style="width: 65%"></div>
-</div>
-</div>
-<div>
-<div class="flex justify-between items-center mb-sm">
-<div class="flex items-center gap-sm">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">dashboard_customize</span>
-<span class="font-body-md font-semibold text-on-surface">Copilot</span>
-</div>
-<span id="epic-copilot-pct" class="text-label-md font-label-md text-outline">20%</span>
-</div>
-<div class="h-2 w-full bg-surface-container rounded-full">
-<div id="epic-copilot-bar" class="h-full bg-primary transition-all duration-500" style="width: 20%"></div>
-</div>
-</div>
-</div>
-<p class="text-label-md text-outline pt-sm">Datos de ejemplo para demo; nombres de épicas sin cambios.</p>
-</div>
-<div id="panel-sprint" class="tab-panel p-lg space-y-md" role="tabpanel" hidden>
-<p class="text-body-md text-on-surface-variant mb-md">Sprint 14 · <span class="font-semibold text-on-surface">ARID-ML</span> · 21 puntos comprometidos</p>
-<ul id="sprint-tasks" class="divide-y divide-outline-variant/50 border border-outline-variant rounded-lg overflow-hidden"></ul>
-</div>
-<div id="panel-tecnicos" class="tab-panel p-lg space-y-md" role="tabpanel" hidden>
-<dl id="tecnicos-dl" class="grid grid-cols-1 sm:grid-cols-2 gap-md text-body-md"></dl>
-</div>
-</div>
-</div>
-<!-- Right Column (30%) -->
-<div class="col-span-3 space-y-lg">
-<!-- Project Info Card -->
-<div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
-<h3 class="font-h3 text-h3 text-on-surface mb-lg">Información General</h3>
-<div class="space-y-md">
-<div class="flex flex-col">
-<span class="text-label-md font-label-md text-outline uppercase tracking-wider">Área / Gerencia</span>
-<span class="text-body-md font-medium text-on-surface">Capital Humano</span>
-</div>
-<div class="flex flex-col">
-<span class="text-label-md font-label-md text-outline uppercase tracking-wider">Unidad de Negocio</span>
-<span class="text-body-md font-medium text-on-surface">Corporativo</span>
-</div>
-<div class="flex flex-col">
-<span class="text-label-md font-label-md text-outline uppercase tracking-wider">Tipo de Proyecto</span>
-<span class="text-body-md font-medium text-on-surface">Agente de IA</span>
-</div>
-<div class="flex flex-col">
-<span class="text-label-md font-label-md text-outline uppercase tracking-wider">Proveedor</span>
-<span class="text-body-md font-medium text-on-surface">Blueprint</span>
-</div>
-<div class="pt-sm border-t border-outline-variant/30 flex justify-between">
-<div class="flex flex-col">
-<span class="text-label-md font-label-md text-outline uppercase tracking-wider">Inicio</span>
-<span class="text-body-md font-medium text-on-surface">2 Abril 2026</span>
-</div>
-<div class="flex flex-col text-right">
-<span class="text-label-md font-label-md text-outline uppercase tracking-wider">Fin Est.</span>
-<span class="text-body-md font-medium text-on-surface">30 Mayo 2026</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Team Section -->
-<div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
-<h3 class="font-h3 text-h3 text-on-surface mb-lg">Equipo del Proyecto</h3>
-<div class="space-y-lg">
-<div class="flex items-center gap-md">
-<img alt="Product Owner" class="w-10 h-10 rounded-full object-cover border-2 border-primary-container" data-alt="portrait of a professional woman with a friendly smile wearing a business suit in a modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7WIVqiqgc_u3Fw3DA3aI-HtjFWnV1_p73TJMSNZcPfN8MoEqpuKlxmHOpKzPp7zbFz2tpZ-FYFXSXeGnapz0RVQLdLWjVK9ckqhT1tTyX_7RU23lv97j9Gfe2ANd79Tgtsp2vcpIsjEVY7-nW9b0Hnr2u-1pcyfWyBa8m-KNYAow2xbLCFR3hpUtKiKELpQ1rYQyQjhfELYjemeoEoyPhjzuAEdQaHvwDjcBgHtnqerd7sZfyhMw_AVKsv2TLS8bP_Ay_g61JIcPq">
-<div>
-<p class="text-body-md font-semibold text-on-surface leading-tight">Paulina Toro</p>
-<p class="text-label-md font-label-md text-primary">Product Owner</p>
-</div>
-</div>
-<div class="flex items-center gap-md">
-<img alt="Business Partner" class="w-10 h-10 rounded-full object-cover border-2 border-outline-variant" data-alt="portrait of a confident middle-aged man with short hair wearing a white shirt in a professional setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlq54_iCV6G_5Dsz0yMAAW_TPPqt5RjVqYmUMC2QZ9eiNV1uCexT9YtwE5TKEKgGUyPKHa3BpvocD-BQU_vzEvV16FWAP2fO8niRnSfqd0E3j0fBct-v-6vNcxtFO2KKpKuZlHHtU1lMHu45RA5EEUbTZzm3rMZjf8f2ZUz370EHCTEZf1NxUIKJz8Bs5cyg57o-zNL6ohvEheE6XVM-pMPT2BWkmIsgtqHqzIP7HOwMc7g7nOxZXVcagH5WXDzYm07lUw0BJ5bhqG">
-<div>
-<p class="text-body-md font-semibold text-on-surface leading-tight">Francisco Echeverría</p>
-<p class="text-label-md font-label-md text-outline">Business Partner</p>
-</div>
-</div>
-<div class="flex items-center gap-md">
-<img alt="Tech Lead" class="w-10 h-10 rounded-full object-cover border-2 border-outline-variant" data-alt="young man with glasses in a tech-focused office environment with computers and monitors in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm4wlckXtiQg-ZJ4dEbKqR54TlZ9O-oxJnAvwwCQj_hSuPP5eQpAwaR695NCvu4D_PjPMw9_EH7JnMHc-4TYh-4s8MwBGb2gzbcs0tNk8zXZLNClJj7dlOZXZDssW9O-M9kSGJMm10Zk6fkNPtdhgKvmncgqGqi1S6Sodz8yunV3Ic54wn2E6tef-P7ckDAKjEWXZ53WWvARaDtaYOhpfBnMufkG9Ndo4irEmbTURpXZUWDQ1Tj1ge16z0gsHAdJOcxFDZ-PKJ4jM8">
-<div>
-<p class="text-body-md font-semibold text-on-surface leading-tight">Lucas Suárez</p>
-<p class="text-label-md font-label-md text-outline">Tech Lead</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Software Space / Jira Info -->
-<div class="bg-on-primary-fixed text-on-primary-container p-lg rounded-lg shadow-sm">
-<div class="flex items-center gap-sm mb-md">
-<span class="material-symbols-outlined text-on-primary-fixed-variant">developer_board</span>
-<h3 class="font-body-lg font-bold">Jira Workspace</h3>
-</div>
-<div class="space-y-md">
-<div class="bg-on-primary-fixed-variant/20 p-md rounded-lg border border-on-primary-fixed-variant/30">
-<p class="text-label-md font-label-md opacity-80 uppercase tracking-widest">Key del Proyecto</p>
-<p class="text-h3 font-h3">ARID-ML</p>
-</div>
-<div class="grid grid-cols-2 gap-sm">
-<div class="bg-on-primary-fixed-variant/20 p-sm rounded-lg text-center">
-<p class="text-label-md">Issues</p>
-<p id="jira-issues" class="text-body-lg font-bold">42</p>
-</div>
-<div class="bg-on-primary-fixed-variant/20 p-sm rounded-lg text-center">
-<p class="text-label-md">Backlog</p>
-<p id="jira-backlog" class="text-body-lg font-bold">128</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-<!-- Simple footer -->
-<footer class="max-w-[1440px] mx-auto px-margin py-xl mt-xl border-t border-outline-variant">
-<div class="flex justify-between items-center text-label-md font-label-md text-outline">
-<p class="">© 2024 Polpaico PMO Dashboard — Gestión de Proyectos de Valor</p>
-<div class="flex gap-lg">
-<a class="hover:text-primary transition-colors" href="#">Manual de Usuario</a>
-<a class="hover:text-primary transition-colors" href="#">Soporte TI</a>
-</div>
-</div>
-</footer>
-<div id="toast-root" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-2 pointer-events-none"></div>
-<script>
-(function () {
-  var SPRINT = [
-    { id: 'ARID-142', title: 'Ingesta batch documentos RRHH', pts: 5, estado: 'En revisión' },
-    { id: 'ARID-151', title: 'Prompt guardrails Chat investigador', pts: 3, estado: 'En curso' },
-    { id: 'ARID-158', title: 'Métricas JEQ en dashboard interno', pts: 8, estado: 'To Do' },
-    { id: 'ARID-160', title: 'Copilot: plantilla respuesta estándar', pts: 5, estado: 'To Do' }
-  ];
-  var TECNICOS = [
-    { k: 'Repositorio', v: 'bitbucket.org/polpaico/arid-ml-agent (rama develop)' },
-    { k: 'Runtime', v: 'Python 3.11 · contenedor AKS · región Chile Central' },
-    { k: 'Modelos', v: 'Embeddings corporativos + LLM vía API privada' },
-    { k: 'Datos sensibles', v: 'PII enmascarada; retención 90 días en staging' },
-    { k: 'Último despliegue', v: 'Build #284 — hace 2 días (QA)' },
-    { k: 'Contacto soporte', v: 'squad-data@polpaico.demo' }
-  ];
+  </head>
+  <body class="text-on-background bg-background">
+    <!-- TopNavBar -->
+    <header
+      class="bg-white dark:bg-slate-900 font-['Inter'] antialiased tracking-tight docked full-width top-0 border-b border-slate-200 dark:border-slate-800 flat no shadows flex justify-between items-center px-8 h-16 w-full sticky z-50"
+    >
+      <div class="flex items-center gap-xl">
+        <span class="text-lg font-bold text-slate-900 dark:text-slate-50"
+          >Portal PMO — Polpaico</span
+        >
+        <nav class="relative z-10 flex items-center gap-lg h-16">
+          <a
+            class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-800 dark:hover:text-slate-200 h-full flex items-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-200"
+            href="mockup-resumen.html"
+            >Resumen</a
+          >
+          <a
+            class="text-[#378ADD] dark:text-blue-400 border-b-2 border-[#378ADD] dark:border-blue-400 font-semibold h-full flex items-center"
+            href="mockup-proyectos.html"
+            >Proyectos</a
+          >
+        </nav>
+      </div>
+      <div class="flex items-center gap-md">
+        <button
+          class="p-sm text-slate-500 hover:bg-slate-50 transition-colors active:scale-95 duration-150"
+        >
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button
+          class="p-sm text-slate-500 hover:bg-slate-50 transition-colors active:scale-95 duration-150"
+        >
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+        <button
+          class="p-sm text-slate-500 hover:bg-slate-50 transition-colors active:scale-95 duration-150"
+        >
+          <span class="material-symbols-outlined">account_circle</span>
+        </button>
+      </div>
+    </header>
+    <main class="max-w-[1440px] mx-auto px-margin py-lg space-y-lg">
+      <!-- Breadcrumb & Header Actions -->
+      <div class="flex flex-col gap-sm">
+        <nav
+          class="flex items-center gap-xs text-label-md font-label-md text-outline"
+        >
+          <a
+            class="hover:text-primary cursor-pointer text-inherit no-underline"
+            href="mockup-resumen.html"
+            >Resumen general</a
+          >
+          <span class="material-symbols-outlined text-[14px]"
+            >chevron_right</span
+          >
+          <span class="text-on-surface">PM-01</span>
+        </nav>
+        <div class="flex justify-between items-start">
+          <div class="space-y-xs">
+            <div class="flex items-center gap-md">
+              <h1 class="font-h1 text-h1 text-on-surface">
+                Agente Contingencia Laboral
+              </h1>
+              <span
+                class="bg-primary/10 text-primary px-sm py-1 rounded-full text-label-md font-label-md"
+                >En curso</span
+              >
+              <span
+                class="bg-error-container text-on-error-container px-sm py-1 rounded-full text-label-md font-label-md flex items-center gap-1"
+              >
+                <span
+                  class="material-symbols-outlined text-[12px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >priority_high</span
+                >
+                Alta
+              </span>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Optimización de stocks y logística mediante modelos de aprendizaje
+              automático.
+            </p>
+          </div>
+          <button
+            id="btn-jira"
+            type="button"
+            class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md flex items-center gap-sm active:scale-95 transition-transform"
+          >
+            Ver en Jira
+            <span class="material-symbols-outlined text-lg">open_in_new</span>
+          </button>
+        </div>
+      </div>
+      <!-- Main Dashboard Layout -->
+      <div class="grid grid-cols-10 gap-gutter">
+        <!-- Left Column (70%) -->
+        <div class="col-span-7 space-y-lg">
+          <!-- KPI Value Progress Cards -->
+          <div class="grid grid-cols-3 gap-gutter">
+            <div
+              class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm"
+            >
+              <p
+                class="font-label-md text-label-md text-outline uppercase tracking-wider mb-sm"
+              >
+                Valor esperado
+              </p>
+              <div class="flex items-baseline gap-xs">
+                <span
+                  id="kpi-esperado"
+                  class="font-data-num text-data-num text-on-surface"
+                  >$3.2M</span
+                >
+                <span class="text-label-md font-label-md text-outline"
+                  >USD</span
+                >
+              </div>
+              <div
+                class="mt-md h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+              >
+                <div
+                  id="kpi-esperado-bar"
+                  class="h-full bg-primary transition-all duration-700"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm"
+            >
+              <p
+                class="font-label-md text-label-md text-outline uppercase tracking-wider mb-sm"
+              >
+                Valor capturado
+              </p>
+              <div class="flex items-baseline gap-xs">
+                <span
+                  id="kpi-capturado"
+                  class="font-data-num text-data-num text-on-surface"
+                  >$1.8M</span
+                >
+                <span class="text-label-md font-label-md text-outline"
+                  >USD</span
+                >
+              </div>
+              <div
+                class="mt-md h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+              >
+                <div
+                  id="kpi-capturado-bar"
+                  class="h-full bg-tertiary-container transition-all duration-700"
+                  style="width: 56%"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm"
+            >
+              <p
+                class="font-label-md text-label-md text-outline uppercase tracking-wider mb-sm"
+              >
+                JEQ
+              </p>
+              <div class="flex items-baseline gap-xs">
+                <span
+                  id="kpi-jeq"
+                  class="font-data-num text-data-num text-on-surface"
+                  >140</span
+                >
+              </div>
+              <div
+                class="mt-md h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+              >
+                <div
+                  id="kpi-jeq-bar"
+                  class="h-full bg-primary transition-all duration-700"
+                  style="width: 60%"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <button
+              type="button"
+              id="btn-kpi-demo"
+              class="text-label-md text-primary hover:underline font-medium"
+            >
+              Simular variación de métricas (demo)
+            </button>
+          </div>
+          <!-- Project Timeline -->
+          <div
+            class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm"
+          >
+            <h3 class="font-h3 text-h3 text-on-surface mb-lg">
+              Cronograma de Fases
+            </h3>
+            <div class="relative pt-xs">
+              <div
+                class="flex items-center justify-between text-label-md font-label-md text-outline mb-xs px-2"
+              >
+                <span class="">Q1 2026</span>
+                <span class="">Q2 2026</span>
+                <span class="">Q3 2026</span>
+                <span class="">Q4 2026</span>
+              </div>
+              <div class="space-y-4">
+                <!-- Gantt Row Item -->
+                <div class="grid grid-cols-6 h-8 items-center relative">
+                  <div
+                    class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
+                  ></div>
+                  <div
+                    class="gantt-phase z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-1 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center px-3"
+                    title="Ideación — 15 Ene – 28 Feb 2026 (cerrada)"
+                    data-phase="Ideación"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-on-tertiary-fixed-variant truncate"
+                      >Ideación</span
+                    >
+                  </div>
+                </div>
+                <div class="grid grid-cols-6 h-8 items-center relative">
+                  <div
+                    class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
+                  ></div>
+                  <div
+                    class="gantt-phase z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-2 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center px-3"
+                    title="Planificación — 1 Mar – 20 Mar 2026 (cerrada)"
+                    data-phase="Planificación"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-on-tertiary-fixed-variant truncate"
+                      >Planificación</span
+                    >
+                  </div>
+                </div>
+                <div class="grid grid-cols-6 h-8 items-center relative">
+                  <div
+                    class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
+                  ></div>
+                  <div
+                    class="gantt-phase z-10 bg-primary/20 h-4 rounded-full col-start-3 col-span-1 border border-primary/40 flex items-center px-3"
+                    title="Diseño — 21 Mar – 10 Abr 2026 (cerrada)"
+                    data-phase="Diseño"
+                  >
+                    <span class="text-[10px] font-bold text-primary truncate"
+                      >Diseño</span
+                    >
+                  </div>
+                </div>
+                <div class="grid grid-cols-6 h-8 items-center relative">
+                  <div
+                    class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
+                  ></div>
+                  <!-- Current Phase Marker -->
+                  <div
+                    class="gantt-phase z-10 bg-primary h-6 rounded-full col-start-4 col-span-1 shadow-md border border-white flex items-center px-3 ring-4 ring-primary/10"
+                    title="Desarrollo — 11 Abr – 30 May 2026 (en curso, 62% avance)"
+                    data-phase="Desarrollo"
+                  >
+                    <span class="text-[10px] font-bold text-white truncate"
+                      >Desarrollo (Actual)</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="grid grid-cols-6 h-8 items-center relative opacity-50"
+                >
+                  <div
+                    class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
+                  ></div>
+                  <div
+                    class="gantt-phase z-10 bg-outline-variant h-4 rounded-full col-start-5 col-span-1 flex items-center px-3"
+                    title="QA — 1 Jun – 20 Jun 2026 (planificada)"
+                    data-phase="QA"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-on-surface-variant truncate"
+                      >QA</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="grid grid-cols-6 h-8 items-center relative opacity-50"
+                >
+                  <div
+                    class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
+                  ></div>
+                  <div
+                    class="gantt-phase z-10 bg-outline-variant h-4 rounded-full col-start-6 col-span-1 flex items-center px-3"
+                    title="Despliegue — 21 Jun – 5 Jul 2026 (planificada)"
+                    data-phase="Despliegue"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-on-surface-variant truncate"
+                      >Despliegue</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Epics & Sprint Progress Tabs -->
+          <div
+            class="bg-white border border-outline-variant rounded-lg shadow-sm overflow-hidden"
+          >
+            <div
+              id="project-tabs"
+              class="flex border-b border-outline-variant"
+              role="tablist"
+            >
+              <button
+                type="button"
+                role="tab"
+                aria-selected="true"
+                data-tab="epicas"
+                class="proj-tab px-lg py-md text-primary border-b-2 border-primary font-semibold text-body-md"
+              >
+                Épicas
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-tab="sprint"
+                class="proj-tab px-lg py-md text-on-surface-variant hover:text-on-surface font-medium text-body-md border-b-2 border-transparent"
+              >
+                Sprint Activo
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-tab="tecnicos"
+                class="proj-tab px-lg py-md text-on-surface-variant hover:text-on-surface font-medium text-body-md border-b-2 border-transparent"
+              >
+                Detalles Técnicos
+              </button>
+            </div>
+            <div
+              id="panel-epicas"
+              class="tab-panel is-active p-lg space-y-md"
+              role="tabpanel"
+            >
+              <div class="space-y-lg">
+                <div>
+                  <div class="flex justify-between items-center mb-sm">
+                    <div class="flex items-center gap-sm">
+                      <span
+                        class="material-symbols-outlined text-primary"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >dataset</span
+                      >
+                      <span class="font-body-md font-semibold text-on-surface"
+                        >Archivos</span
+                      >
+                    </div>
+                    <span
+                      id="epic-archivos-pct"
+                      class="text-label-md font-label-md text-outline"
+                      >100%</span
+                    >
+                  </div>
+                  <div class="h-2 w-full bg-surface-container rounded-full">
+                    <div
+                      id="epic-archivos-bar"
+                      class="h-full bg-primary transition-all duration-500"
+                      style="width: 100%"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between items-center mb-sm">
+                    <div class="flex items-center gap-sm">
+                      <span
+                        class="material-symbols-outlined text-primary"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >insights</span
+                      >
+                      <span class="font-body-md font-semibold text-on-surface"
+                        >Chat investigador</span
+                      >
+                    </div>
+                    <span
+                      id="epic-chat-pct"
+                      class="text-label-md font-label-md text-outline"
+                      >65%</span
+                    >
+                  </div>
+                  <div class="h-2 w-full bg-surface-container rounded-full">
+                    <div
+                      id="epic-chat-bar"
+                      class="h-full bg-primary transition-all duration-500"
+                      style="width: 65%"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between items-center mb-sm">
+                    <div class="flex items-center gap-sm">
+                      <span
+                        class="material-symbols-outlined text-primary"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >dashboard_customize</span
+                      >
+                      <span class="font-body-md font-semibold text-on-surface"
+                        >Copilot</span
+                      >
+                    </div>
+                    <span
+                      id="epic-copilot-pct"
+                      class="text-label-md font-label-md text-outline"
+                      >20%</span
+                    >
+                  </div>
+                  <div class="h-2 w-full bg-surface-container rounded-full">
+                    <div
+                      id="epic-copilot-bar"
+                      class="h-full bg-primary transition-all duration-500"
+                      style="width: 20%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <p class="text-label-md text-outline pt-sm">
+                Datos de ejemplo para demo; nombres de épicas sin cambios.
+              </p>
+            </div>
+            <div
+              id="panel-sprint"
+              class="tab-panel p-lg space-y-md"
+              role="tabpanel"
+              hidden
+            >
+              <p class="text-body-md text-on-surface-variant mb-md">
+                Sprint 14 ·
+                <span class="font-semibold text-on-surface">ARID-ML</span> · 21
+                puntos comprometidos
+              </p>
+              <ul
+                id="sprint-tasks"
+                class="divide-y divide-outline-variant/50 border border-outline-variant rounded-lg overflow-hidden"
+              ></ul>
+            </div>
+            <div
+              id="panel-tecnicos"
+              class="tab-panel p-lg space-y-md"
+              role="tabpanel"
+              hidden
+            >
+              <dl
+                id="tecnicos-dl"
+                class="grid grid-cols-1 sm:grid-cols-2 gap-md text-body-md"
+              ></dl>
+            </div>
+          </div>
+        </div>
+        <!-- Right Column (30%) -->
+        <div class="col-span-3 space-y-lg">
+          <!-- Project Info Card -->
+          <div
+            class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm"
+          >
+            <h3 class="font-h3 text-h3 text-on-surface mb-lg">
+              Información General
+            </h3>
+            <div class="space-y-md">
+              <div class="flex flex-col">
+                <span
+                  class="text-label-md font-label-md text-outline uppercase tracking-wider"
+                  >Área / Gerencia</span
+                >
+                <span class="text-body-md font-medium text-on-surface"
+                  >Capital Humano</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="text-label-md font-label-md text-outline uppercase tracking-wider"
+                  >Unidad de Negocio</span
+                >
+                <span class="text-body-md font-medium text-on-surface"
+                  >Corporativo</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="text-label-md font-label-md text-outline uppercase tracking-wider"
+                  >Tipo de Proyecto</span
+                >
+                <span class="text-body-md font-medium text-on-surface"
+                  >Agente de IA</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="text-label-md font-label-md text-outline uppercase tracking-wider"
+                  >Proveedor</span
+                >
+                <span class="text-body-md font-medium text-on-surface"
+                  >Blueprint</span
+                >
+              </div>
+              <div
+                class="pt-sm border-t border-outline-variant/30 flex justify-between"
+              >
+                <div class="flex flex-col">
+                  <span
+                    class="text-label-md font-label-md text-outline uppercase tracking-wider"
+                    >Inicio</span
+                  >
+                  <span class="text-body-md font-medium text-on-surface"
+                    >2 Abril 2026</span
+                  >
+                </div>
+                <div class="flex flex-col text-right">
+                  <span
+                    class="text-label-md font-label-md text-outline uppercase tracking-wider"
+                    >Fin Est.</span
+                  >
+                  <span class="text-body-md font-medium text-on-surface"
+                    >30 Mayo 2026</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Team Section -->
+          <div
+            class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm"
+          >
+            <h3 class="font-h3 text-h3 text-on-surface mb-lg">
+              Equipo del Proyecto
+            </h3>
+            <div class="space-y-lg">
+              <div class="flex items-center gap-md">
+                <img
+                  alt="Product Owner"
+                  class="w-10 h-10 rounded-full object-cover border-2 border-primary-container"
+                  data-alt="portrait of a professional woman with a friendly smile wearing a business suit in a modern office environment"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7WIVqiqgc_u3Fw3DA3aI-HtjFWnV1_p73TJMSNZcPfN8MoEqpuKlxmHOpKzPp7zbFz2tpZ-FYFXSXeGnapz0RVQLdLWjVK9ckqhT1tTyX_7RU23lv97j9Gfe2ANd79Tgtsp2vcpIsjEVY7-nW9b0Hnr2u-1pcyfWyBa8m-KNYAow2xbLCFR3hpUtKiKELpQ1rYQyQjhfELYjemeoEoyPhjzuAEdQaHvwDjcBgHtnqerd7sZfyhMw_AVKsv2TLS8bP_Ay_g61JIcPq"
+                />
+                <div>
+                  <p
+                    class="text-body-md font-semibold text-on-surface leading-tight"
+                  >
+                    Paulina Toro
+                  </p>
+                  <p class="text-label-md font-label-md text-primary">
+                    Product Owner
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-md">
+                <img
+                  alt="Business Partner"
+                  class="w-10 h-10 rounded-full object-cover border-2 border-outline-variant"
+                  data-alt="portrait of a confident middle-aged man with short hair wearing a white shirt in a professional setting"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlq54_iCV6G_5Dsz0yMAAW_TPPqt5RjVqYmUMC2QZ9eiNV1uCexT9YtwE5TKEKgGUyPKHa3BpvocD-BQU_vzEvV16FWAP2fO8niRnSfqd0E3j0fBct-v-6vNcxtFO2KKpKuZlHHtU1lMHu45RA5EEUbTZzm3rMZjf8f2ZUz370EHCTEZf1NxUIKJz8Bs5cyg57o-zNL6ohvEheE6XVM-pMPT2BWkmIsgtqHqzIP7HOwMc7g7nOxZXVcagH5WXDzYm07lUw0BJ5bhqG"
+                />
+                <div>
+                  <p
+                    class="text-body-md font-semibold text-on-surface leading-tight"
+                  >
+                    Francisco Echeverría
+                  </p>
+                  <p class="text-label-md font-label-md text-outline">
+                    Business Partner
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-md">
+                <img
+                  alt="Tech Lead"
+                  class="w-10 h-10 rounded-full object-cover border-2 border-outline-variant"
+                  data-alt="young man with glasses in a tech-focused office environment with computers and monitors in the background"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm4wlckXtiQg-ZJ4dEbKqR54TlZ9O-oxJnAvwwCQj_hSuPP5eQpAwaR695NCvu4D_PjPMw9_EH7JnMHc-4TYh-4s8MwBGb2gzbcs0tNk8zXZLNClJj7dlOZXZDssW9O-M9kSGJMm10Zk6fkNPtdhgKvmncgqGqi1S6Sodz8yunV3Ic54wn2E6tef-P7ckDAKjEWXZ53WWvARaDtaYOhpfBnMufkG9Ndo4irEmbTURpXZUWDQ1Tj1ge16z0gsHAdJOcxFDZ-PKJ4jM8"
+                />
+                <div>
+                  <p
+                    class="text-body-md font-semibold text-on-surface leading-tight"
+                  >
+                    Lucas Suárez
+                  </p>
+                  <p class="text-label-md font-label-md text-outline">
+                    Tech Lead
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Software Space / Jira Info -->
+          <div
+            class="bg-on-primary-fixed text-on-primary-container p-lg rounded-lg shadow-sm"
+          >
+            <div class="flex items-center gap-sm mb-md">
+              <span
+                class="material-symbols-outlined text-on-primary-fixed-variant"
+                >developer_board</span
+              >
+              <h3 class="font-body-lg font-bold">Jira Workspace</h3>
+            </div>
+            <div class="space-y-md">
+              <div
+                class="bg-on-primary-fixed-variant/20 p-md rounded-lg border border-on-primary-fixed-variant/30"
+              >
+                <p
+                  class="text-label-md font-label-md opacity-80 uppercase tracking-widest"
+                >
+                  Key del Proyecto
+                </p>
+                <p class="text-h3 font-h3">ARID-ML</p>
+              </div>
+              <div class="grid grid-cols-2 gap-sm">
+                <div
+                  class="bg-on-primary-fixed-variant/20 p-sm rounded-lg text-center"
+                >
+                  <p class="text-label-md">Issues</p>
+                  <p id="jira-issues" class="text-body-lg font-bold">42</p>
+                </div>
+                <div
+                  class="bg-on-primary-fixed-variant/20 p-sm rounded-lg text-center"
+                >
+                  <p class="text-label-md">Backlog</p>
+                  <p id="jira-backlog" class="text-body-lg font-bold">128</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Simple footer -->
+    <footer
+      class="max-w-[1440px] mx-auto px-margin py-xl mt-xl border-t border-outline-variant"
+    >
+      <div
+        class="flex justify-between items-center text-label-md font-label-md text-outline"
+      >
+        <p class="">
+          © 2026 Polpaico PMO Dashboard — Gestión de Proyectos de Valor
+        </p>
+        <div class="flex gap-lg">
+          <a class="hover:text-primary transition-colors" href="#"
+            >Manual de Usuario</a
+          >
+          <a class="hover:text-primary transition-colors" href="#"
+            >Soporte TI</a
+          >
+        </div>
+      </div>
+    </footer>
+    <div
+      id="toast-root"
+      class="fixed bottom-6 right-6 z-[100] flex flex-col gap-2 pointer-events-none"
+    ></div>
+    <script>
+      (function () {
+        var SPRINT = [
+          {
+            id: "ARID-142",
+            title: "Ingesta batch documentos RRHH",
+            pts: 5,
+            estado: "En revisión",
+          },
+          {
+            id: "ARID-151",
+            title: "Prompt guardrails Chat investigador",
+            pts: 3,
+            estado: "En curso",
+          },
+          {
+            id: "ARID-158",
+            title: "Métricas JEQ en dashboard interno",
+            pts: 8,
+            estado: "To Do",
+          },
+          {
+            id: "ARID-160",
+            title: "Copilot: plantilla respuesta estándar",
+            pts: 5,
+            estado: "To Do",
+          },
+        ];
+        var TECNICOS = [
+          {
+            k: "Repositorio",
+            v: "bitbucket.org/polpaico/arid-ml-agent (rama develop)",
+          },
+          {
+            k: "Runtime",
+            v: "Python 3.11 · contenedor AKS · región Chile Central",
+          },
+          { k: "Modelos", v: "Embeddings corporativos + LLM vía API privada" },
+          {
+            k: "Datos sensibles",
+            v: "PII enmascarada; retención 90 días en staging",
+          },
+          { k: "Último despliegue", v: "Build #284 — hace 2 días (QA)" },
+          { k: "Contacto soporte", v: "squad-data@polpaico.demo" },
+        ];
 
-  function $(id) { return document.getElementById(id); }
+        function $(id) {
+          return document.getElementById(id);
+        }
 
-  var tabs = document.querySelectorAll('.proj-tab');
-  var panels = {
-    epicas: $('panel-epicas'),
-    sprint: $('panel-sprint'),
-    tecnicos: $('panel-tecnicos')
-  };
+        var tabs = document.querySelectorAll(".proj-tab");
+        var panels = {
+          epicas: $("panel-epicas"),
+          sprint: $("panel-sprint"),
+          tecnicos: $("panel-tecnicos"),
+        };
 
-  tabs.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var name = btn.getAttribute('data-tab');
-      tabs.forEach(function (b) {
-        var on = b.getAttribute('data-tab') === name;
-        b.setAttribute('aria-selected', on ? 'true' : 'false');
-        b.classList.toggle('text-primary', on);
-        b.classList.toggle('border-primary', on);
-        b.classList.toggle('border-b-2', true);
-        b.classList.toggle('font-semibold', on);
-        b.classList.toggle('text-on-surface-variant', !on);
-        b.classList.toggle('font-medium', !on);
-        b.classList.toggle('border-transparent', !on);
-      });
-      Object.keys(panels).forEach(function (key) {
-        var p = panels[key];
-        if (!p) return;
-        var active = key === name;
-        p.classList.toggle('is-active', active);
-        p.hidden = !active;
-      });
-    });
-  });
+        tabs.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var name = btn.getAttribute("data-tab");
+            tabs.forEach(function (b) {
+              var on = b.getAttribute("data-tab") === name;
+              b.setAttribute("aria-selected", on ? "true" : "false");
+              b.classList.toggle("text-primary", on);
+              b.classList.toggle("border-primary", on);
+              b.classList.toggle("border-b-2", true);
+              b.classList.toggle("font-semibold", on);
+              b.classList.toggle("text-on-surface-variant", !on);
+              b.classList.toggle("font-medium", !on);
+              b.classList.toggle("border-transparent", !on);
+            });
+            Object.keys(panels).forEach(function (key) {
+              var p = panels[key];
+              if (!p) return;
+              var active = key === name;
+              p.classList.toggle("is-active", active);
+              p.hidden = !active;
+            });
+          });
+        });
 
-  var ul = $('sprint-tasks');
-  if (ul) {
-    ul.innerHTML = SPRINT.map(function (t) {
-      return '<li class="flex items-center justify-between gap-md px-md py-sm bg-surface-container-low/50 hover:bg-surface-container-low transition-colors">' +
-        '<span class="text-label-md text-primary font-mono shrink-0">' + t.id + '</span>' +
-        '<span class="text-body-md text-on-surface flex-1 min-w-0">' + t.title + '</span>' +
-        '<span class="text-label-md text-outline shrink-0">' + t.pts + ' pt</span>' +
-        '<span class="text-label-md font-medium text-on-surface-variant shrink-0">' + t.estado + '</span></li>';
-    }).join('');
-  }
+        var ul = $("sprint-tasks");
+        if (ul) {
+          ul.innerHTML = SPRINT.map(function (t) {
+            return (
+              '<li class="flex items-center justify-between gap-md px-md py-sm bg-surface-container-low/50 hover:bg-surface-container-low transition-colors">' +
+              '<span class="text-label-md text-primary font-mono shrink-0">' +
+              t.id +
+              "</span>" +
+              '<span class="text-body-md text-on-surface flex-1 min-w-0">' +
+              t.title +
+              "</span>" +
+              '<span class="text-label-md text-outline shrink-0">' +
+              t.pts +
+              " pt</span>" +
+              '<span class="text-label-md font-medium text-on-surface-variant shrink-0">' +
+              t.estado +
+              "</span></li>"
+            );
+          }).join("");
+        }
 
-  var dl = $('tecnicos-dl');
-  if (dl) {
-    dl.innerHTML = TECNICOS.map(function (row) {
-      return '<div class="border border-outline-variant rounded-lg p-md bg-surface-container-low/30">' +
-        '<dt class="text-label-md text-outline uppercase tracking-wider">' + row.k + '</dt>' +
-        '<dd class="mt-xs text-on-surface font-medium">' + row.v + '</dd></div>';
-    }).join('');
-  }
+        var dl = $("tecnicos-dl");
+        if (dl) {
+          dl.innerHTML = TECNICOS.map(function (row) {
+            return (
+              '<div class="border border-outline-variant rounded-lg p-md bg-surface-container-low/30">' +
+              '<dt class="text-label-md text-outline uppercase tracking-wider">' +
+              row.k +
+              "</dt>" +
+              '<dd class="mt-xs text-on-surface font-medium">' +
+              row.v +
+              "</dd></div>"
+            );
+          }).join("");
+        }
 
-  function showToast(msg) {
-    var root = $('toast-root');
-    if (!root) return;
-    var el = document.createElement('div');
-    el.className = 'toast-enter pointer-events-auto bg-inverse-surface text-inverse-on-surface px-lg py-md rounded-lg shadow-lg text-body-md max-w-sm';
-    el.textContent = msg;
-    root.appendChild(el);
-    setTimeout(function () { el.remove(); }, 3200);
-  }
+        function showToast(msg) {
+          var root = $("toast-root");
+          if (!root) return;
+          var el = document.createElement("div");
+          el.className =
+            "toast-enter pointer-events-auto bg-inverse-surface text-inverse-on-surface px-lg py-md rounded-lg shadow-lg text-body-md max-w-sm";
+          el.textContent = msg;
+          root.appendChild(el);
+          setTimeout(function () {
+            el.remove();
+          }, 3200);
+        }
 
-  var btnJira = $('btn-jira');
-  if (btnJira) {
-    btnJira.addEventListener('click', function () {
-      showToast('Demo: enlace a Jira (ARID-ML) simulado.');
-    });
-  }
+        var btnJira = $("btn-jira");
+        if (btnJira) {
+          btnJira.addEventListener("click", function () {
+            showToast("Demo: enlace a Jira (ARID-ML) simulado.");
+          });
+        }
 
-  var btnKpi = $('btn-kpi-demo');
-  if (btnKpi) {
-    btnKpi.addEventListener('click', function () {
-      jitterKpis();
-      showToast('Métricas regeneradas (solo demo).');
-    });
-  }
+        var btnKpi = $("btn-kpi-demo");
+        if (btnKpi) {
+          btnKpi.addEventListener("click", function () {
+            jitterKpis();
+            showToast("Métricas regeneradas (solo demo).");
+          });
+        }
 
-  function jitterKpis() {
-    var esperado = 3.05 + Math.random() * 0.35;
-    var ratio = 0.52 + Math.random() * 0.12;
-    var capturado = esperado * ratio;
-    var jeq = 128 + Math.floor(Math.random() * 36);
-    var ke = $('kpi-esperado');
-    var kc = $('kpi-capturado');
-    var kj = $('kpi-jeq');
-    var kcb = $('kpi-capturado-bar');
-    var kjb = $('kpi-jeq-bar');
-    if (ke) ke.textContent = '$' + esperado.toFixed(1) + 'M';
-    if (kc) kc.textContent = '$' + capturado.toFixed(1) + 'M';
-    if (kj) kj.textContent = String(jeq);
-    if (kcb) kcb.style.width = Math.round(ratio * 100) + '%';
-    if (kjb) kjb.style.width = Math.min(100, Math.round((jeq / 200) * 100)) + '%';
-    var issues = 38 + Math.floor(Math.random() * 12);
-    var backlog = 115 + Math.floor(Math.random() * 28);
-    var ji = $('jira-issues');
-    var jb = $('jira-backlog');
-    if (ji) ji.textContent = String(issues);
-    if (jb) jb.textContent = String(backlog);
-    var chat = 58 + Math.floor(Math.random() * 18);
-    var copilot = 15 + Math.floor(Math.random() * 12);
-    var ecp = $('epic-chat-pct');
-    var ecb = $('epic-chat-bar');
-    var epp = $('epic-copilot-pct');
-    var epb = $('epic-copilot-bar');
-    if (ecp) ecp.textContent = chat + '%';
-    if (ecb) ecb.style.width = chat + '%';
-    if (epp) epp.textContent = copilot + '%';
-    if (epb) epb.style.width = copilot + '%';
-  }
+        function jitterKpis() {
+          var esperado = 3.05 + Math.random() * 0.35;
+          var ratio = 0.52 + Math.random() * 0.12;
+          var capturado = esperado * ratio;
+          var jeq = 128 + Math.floor(Math.random() * 36);
+          var ke = $("kpi-esperado");
+          var kc = $("kpi-capturado");
+          var kj = $("kpi-jeq");
+          var kcb = $("kpi-capturado-bar");
+          var kjb = $("kpi-jeq-bar");
+          if (ke) ke.textContent = "$" + esperado.toFixed(1) + "M";
+          if (kc) kc.textContent = "$" + capturado.toFixed(1) + "M";
+          if (kj) kj.textContent = String(jeq);
+          if (kcb) kcb.style.width = Math.round(ratio * 100) + "%";
+          if (kjb)
+            kjb.style.width =
+              Math.min(100, Math.round((jeq / 200) * 100)) + "%";
+          var issues = 38 + Math.floor(Math.random() * 12);
+          var backlog = 115 + Math.floor(Math.random() * 28);
+          var ji = $("jira-issues");
+          var jb = $("jira-backlog");
+          if (ji) ji.textContent = String(issues);
+          if (jb) jb.textContent = String(backlog);
+          var chat = 58 + Math.floor(Math.random() * 18);
+          var copilot = 15 + Math.floor(Math.random() * 12);
+          var ecp = $("epic-chat-pct");
+          var ecb = $("epic-chat-bar");
+          var epp = $("epic-copilot-pct");
+          var epb = $("epic-copilot-bar");
+          if (ecp) ecp.textContent = chat + "%";
+          if (ecb) ecb.style.width = chat + "%";
+          if (epp) epp.textContent = copilot + "%";
+          if (epb) epb.style.width = copilot + "%";
+        }
 
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'r' && e.ctrlKey) {
-      e.preventDefault();
-      jitterKpis();
-      showToast('KPI actualizados (datos demo, Ctrl+R).');
-    }
-  });
-})();
-</script>
-</body></html>
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "r" && e.ctrlKey) {
+            e.preventDefault();
+            jitterKpis();
+            showToast("KPI actualizados (datos demo, Ctrl+R).");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,117 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-  (function () {
-    var loc = window.location;
-    var baseHref;
-    if (loc.protocol === "file:") {
-      var href = loc.href.replace(/[?#].*$/, "");
-      var last = Math.max(href.lastIndexOf("/"), href.lastIndexOf("\\"));
-      baseHref = last >= 0 ? href.slice(0, last + 1) : href;
-    } else {
-      var path = loc.pathname;
-      if (/\.html?$/i.test(path)) {
-        baseHref = loc.origin + path.replace(/[^/]+$/, "");
-      } else if (path.endsWith("/")) {
-        baseHref = loc.origin + path;
-      } else {
-        baseHref = loc.origin + path + "/";
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var loc = window.location;
+        var baseHref;
+        if (loc.protocol === "file:") {
+          var href = loc.href.replace(/[?#].*$/, "");
+          var last = Math.max(href.lastIndexOf("/"), href.lastIndexOf("\\"));
+          baseHref = last >= 0 ? href.slice(0, last + 1) : href;
+        } else {
+          var path = loc.pathname;
+          if (/\.html?$/i.test(path)) {
+            baseHref = loc.origin + path.replace(/[^/]+$/, "");
+          } else if (path.endsWith("/")) {
+            baseHref = loc.origin + path;
+          } else {
+            baseHref = loc.origin + path + "/";
+          }
+        }
+        var b = document.createElement("base");
+        b.href = baseHref;
+        document.head.insertBefore(b, document.head.firstChild);
+      })();
+    </script>
+    <title>Portal PMO — Mockups</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
       }
-    }
-    var b = document.createElement("base");
-    b.href = baseHref;
-    document.head.insertBefore(b, document.head.firstChild);
-  })();
-  </script>
-  <title>Portal PMO — Mockups</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Inter, system-ui, sans-serif;
-      background: #f8f9ff;
-      color: #181c21;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-    .card {
-      background: #fff;
-      border: 1px solid #e0e2ea;
-      border-radius: 12px;
-      padding: 32px;
-      max-width: 480px;
-      width: 100%;
-      box-shadow: 0 1px 3px rgba(24, 28, 33, 0.06);
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 1.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-    p {
-      margin: 0 0 24px;
-      font-size: 0.875rem;
-      line-height: 1.5;
-      color: #414751;
-    }
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    a {
-      display: block;
-      text-align: center;
-      padding: 14px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9375rem;
-      text-decoration: none;
-      transition: background 0.15s, color 0.15s;
-    }
-    a.primary {
-      background: #005ea4;
-      color: #fff;
-    }
-    a.primary:hover {
-      background: #004880;
-    }
-    a.secondary {
-      background: #eceef5;
-      color: #005ea4;
-      border: 1px solid #e0e2ea;
-    }
-    a.secondary:hover {
-      background: #e0e2ea;
-    }
-    footer {
-      margin-top: 20px;
-      font-size: 0.75rem;
-      color: #717783;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h1>Portal PMO — Polpaico</h1>
-    <p>Página inicial del mockup: <strong>Resumen</strong>. Desde ahí, en la barra superior, <strong>Proyectos</strong> abre la otra vista.</p>
-    <div class="links">
-      <a class="primary" href="mockup-resumen.html">Vista Resumen</a>
-      <a class="secondary" href="mockup-proyectos.html">Vista Proyectos</a>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, system-ui, sans-serif;
+        background: #f8f9ff;
+        color: #181c21;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #e0e2ea;
+        border-radius: 12px;
+        padding: 32px;
+        max-width: 480px;
+        width: 100%;
+        box-shadow: 0 1px 3px rgba(24, 28, 33, 0.06);
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      p {
+        margin: 0 0 24px;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: #414751;
+      }
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      a {
+        display: block;
+        text-align: center;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9375rem;
+        text-decoration: none;
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+      a.primary {
+        background: #005ea4;
+        color: #fff;
+      }
+      a.primary:hover {
+        background: #004880;
+      }
+      a.secondary {
+        background: #eceef5;
+        color: #005ea4;
+        border: 1px solid #e0e2ea;
+      }
+      a.secondary:hover {
+        background: #e0e2ea;
+      }
+      footer {
+        margin-top: 20px;
+        font-size: 0.75rem;
+        color: #717783;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Portal PMO — Polpaico</h1>
+      <p>
+        Página inicial del mockup: <strong>Resumen</strong>. Desde ahí, en la
+        barra superior, <strong>Proyectos</strong> abre la otra vista.
+      </p>
+      <div class="links">
+        <a class="primary" href="mockup-resumen.html">Vista Resumen</a>
+        <a class="secondary" href="mockup-proyectos.html">Vista Proyectos</a>
+      </div>
+      <footer>Datos de ejemplo · solo demostración</footer>
     </div>
-    <footer>Datos de ejemplo · solo demostración</footer>
-  </div>
-</body>
+  </body>
 </html>
