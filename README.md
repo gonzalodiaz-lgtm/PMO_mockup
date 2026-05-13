@@ -10,6 +10,8 @@ Mockups HTML estáticos del **Portal PMO — Polpaico** para compartir por enlac
 | `mockup-resumen.html` | Vista tipo tablero / resumen |
 | `mockup-proyectos.html` | Vista listado de proyectos |
 
+En **Resumen** y **Proyectos**, la barra superior enlaza entre ambas páginas. Cada HTML incluye un script que fija `<base href>` según la URL real (GitHub Pages con o sin barra final, `file://` en Windows, etc.) para que los enlaces relativos no se rompan.
+
 ## Publicar en GitHub Pages
 
 1. Crea un repositorio en GitHub y sube esta carpeta (o haz push si ya tienes el repo clonado).

@@ -3,6 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+  (function () {
+    var loc = window.location;
+    var baseHref;
+    if (loc.protocol === "file:") {
+      var href = loc.href.replace(/[?#].*$/, "");
+      var last = Math.max(href.lastIndexOf("/"), href.lastIndexOf("\\"));
+      baseHref = last >= 0 ? href.slice(0, last + 1) : href;
+    } else {
+      var path = loc.pathname;
+      if (/\.html?$/i.test(path)) {
+        baseHref = loc.origin + path.replace(/[^/]+$/, "");
+      } else if (path.endsWith("/")) {
+        baseHref = loc.origin + path;
+      } else {
+        baseHref = loc.origin + path + "/";
+      }
+    }
+    var b = document.createElement("base");
+    b.href = baseHref;
+    document.head.insertBefore(b, document.head.firstChild);
+  })();
+  </script>
   <title>Portal PMO — Mockups</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,8 +108,8 @@
     <h1>Portal PMO — Polpaico</h1>
     <p>Página inicial del mockup: <strong>Resumen</strong>. Desde ahí, en la barra superior, <strong>Proyectos</strong> abre la otra vista.</p>
     <div class="links">
-      <a class="primary" href="./mockup-resumen.html">Vista Resumen</a>
-      <a class="secondary" href="./mockup-proyectos.html">Vista Proyectos</a>
+      <a class="primary" href="mockup-resumen.html">Vista Resumen</a>
+      <a class="secondary" href="mockup-proyectos.html">Vista Proyectos</a>
     </div>
     <footer>Datos de ejemplo · solo demostración</footer>
   </div>
