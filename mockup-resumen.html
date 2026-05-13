@@ -126,13 +126,22 @@
         }
         body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+        th.sortable:hover { color: #005ea4; }
+        tr.row-proj { cursor: pointer; }
+        tr.row-proj:focus { outline: 2px solid #005ea4; outline-offset: -2px; }
+        .toast-enter { animation: resToastIn 0.28s ease-out; }
+        @keyframes resToastIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="text-on-background bg-background">
 <!-- Top Alert Bar -->
-<div class="bg-error text-on-error px-margin py-2 flex items-center justify-center space-x-2">
-<span class="material-symbols-outlined text-[20px]">warning</span>
-<span class="font-label-md text-label-md">3 proyectos llevan más de 30 días sin cambio de estado — revisar</span>
+<div id="alert-stale" class="bg-error text-on-error px-margin py-2 flex items-center justify-center space-x-2 relative pr-14">
+<span class="material-symbols-outlined text-[20px] shrink-0">warning</span>
+<span class="font-label-md text-label-md text-center flex-1">3 proyectos llevan más de 30 días sin cambio de estado — revisar</span>
+<button type="button" id="alert-dismiss" class="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-white/20 transition-colors" aria-label="Cerrar aviso">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
 </div>
 <!-- TopNavBar from JSON Anchor -->
 <header class="bg-white dark:bg-slate-900 font-['Inter'] antialiased tracking-tight docked full-width top-0 border-b border-slate-200 dark:border-slate-800 flat no shadows flex justify-between items-center px-8 h-16 w-full sticky z-50">
@@ -144,7 +153,7 @@
 <a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-800 dark:hover:text-slate-200 h-full flex items-center transition-colors duration-200" href="mockup-proyectos.html">Proyectos</a>
 </nav>
 </div>
-<div class="flex items-center gap-4"><button class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-outline-variant text-slate-600 hover:bg-slate-50 hover:text-primary transition-all duration-200 active:scale-95">
+<div class="flex items-center gap-4"><button id="btn-refresh-metrics" type="button" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-outline-variant text-slate-600 hover:bg-slate-50 hover:text-primary transition-all duration-200 active:scale-95">
 <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
 <span class="text-body-md font-medium whitespace-nowrap">Actualizar métricas</span>
 </button>
@@ -166,41 +175,41 @@
 <div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg">
 <p class="text-on-surface-variant font-label-md text-label-md uppercase mb-1">Total Proyectos</p>
 <div class="flex items-baseline gap-2">
-<span class="font-data-num text-data-num text-on-surface">23</span>
+<span id="kpi-total" class="font-data-num text-data-num text-on-surface">23</span>
 <span class="text-on-surface-variant text-body-md">Global</span>
 </div>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg">
 <p class="text-on-surface-variant font-label-md text-label-md uppercase mb-1">En curso</p>
 <div class="flex items-baseline gap-2">
-<span class="font-data-num text-data-num text-primary">14</span>
+<span id="kpi-curso" class="font-data-num text-data-num text-primary">14</span>
 <span class="material-symbols-outlined text-primary text-[18px]">trending_up</span>
 </div>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg">
 <p class="text-on-surface-variant font-label-md text-label-md uppercase mb-1">En pausa</p>
 <div class="flex items-baseline gap-2">
-<span class="font-data-num text-data-num text-tertiary">5</span>
+<span id="kpi-pausa" class="font-data-num text-data-num text-tertiary">5</span>
 <span class="material-symbols-outlined text-tertiary text-[18px]">pause_circle</span>
 </div>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg">
 <p class="text-on-surface-variant font-label-md text-label-md uppercase mb-1">Por hacer</p>
 <div class="flex items-baseline gap-2">
-<span class="font-data-num text-data-num text-on-surface-variant">4</span>
+<span id="kpi-todo" class="font-data-num text-data-num text-on-surface-variant">4</span>
 <span class="material-symbols-outlined text-on-surface-variant text-[18px]">list_alt</span>
 </div>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg">
 <p class="text-on-surface-variant font-label-md text-label-md uppercase mb-1">Valor capturado</p>
 <div class="flex items-baseline gap-2">
-<span class="font-data-num text-data-num text-on-surface">$4.2M</span>
+<span id="kpi-valor" class="font-data-num text-data-num text-on-surface">$4.2M</span>
 </div>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg">
 <p class="text-on-surface-variant font-label-md text-label-md uppercase mb-1">JEQ</p>
 <div class="flex items-baseline gap-2">
-<span class="font-data-num text-data-num text-on-surface">312</span>
+<span id="kpi-jeq" class="font-data-num text-data-num text-on-surface">312</span>
 <span class="text-on-surface-variant text-body-md">HH</span>
 </div>
 </div>
@@ -357,88 +366,281 @@
 <div class="px-lg py-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
 <h3 class="font-h3 text-h3 text-on-surface">Listado de Proyectos</h3>
 <div class="flex gap-2">
-<button class="bg-surface-container-lowest border border-outline-variant px-3 py-1 rounded text-body-md font-medium flex items-center gap-1">
+<button id="btn-toggle-filter" type="button" class="bg-surface-container-lowest border border-outline-variant px-3 py-1 rounded text-body-md font-medium flex items-center gap-1">
 <span class="material-symbols-outlined text-[18px]">filter_list</span> Filtrar
                     </button>
-<button class="bg-primary text-on-primary px-3 py-1 rounded text-body-md font-medium flex items-center gap-1">
+<button type="button" class="bg-primary text-on-primary px-3 py-1 rounded text-body-md font-medium flex items-center gap-1">
 <span class="material-symbols-outlined text-[18px]">add</span> Nuevo
                     </button>
+</div>
+</div>
+<div id="filter-panel" class="hidden px-lg py-md bg-surface-container-low border-b border-outline-variant grid grid-cols-1 md:grid-cols-4 gap-3">
+<label class="flex flex-col gap-1 text-label-md text-on-surface-variant">
+<span>Buscar</span>
+<input id="filter-q" type="search" placeholder="Key o nombre…" class="rounded border border-outline-variant px-3 py-2 text-body-md bg-white">
+</label>
+<label class="flex flex-col gap-1 text-label-md text-on-surface-variant">
+<span>Unidad</span>
+<select id="filter-unidad" class="rounded border border-outline-variant px-3 py-2 text-body-md bg-white">
+<option value="">Todas</option>
+<option>Áridos</option>
+<option>Cemento</option>
+<option>Hormigón</option>
+<option>Corporativo</option>
+<option>Coactiva</option>
+</select>
+</label>
+<label class="flex flex-col gap-1 text-label-md text-on-surface-variant">
+<span>Estado</span>
+<select id="filter-estado" class="rounded border border-outline-variant px-3 py-2 text-body-md bg-white">
+<option value="">Todos</option>
+<option>Listo</option>
+<option>Por Hacer</option>
+<option>En pausa</option>
+<option>En curso</option>
+</select>
+</label>
+<div class="flex items-end gap-2">
+<button id="filter-apply" type="button" class="bg-primary text-on-primary px-4 py-2 rounded text-body-md font-medium">Aplicar</button>
+<button id="filter-reset" type="button" class="border border-outline-variant px-4 py-2 rounded text-body-md">Limpiar</button>
 </div>
 </div>
 <table class="w-full text-left">
 <thead>
 <tr class="bg-surface-container-low border-b border-outline-variant text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">
-<th class="px-lg py-4">Key</th>
-<th class="px-lg py-4">Proyecto</th>
-<th class="px-lg py-4">Unidad</th>
-<th class="px-lg py-4">Tipo</th>
-<th class="px-lg py-4">Fase</th>
-<th class="px-lg py-4">Estado</th>
-<th class="px-lg py-4 text-right">Captura de Valor</th>
+<th class="px-lg py-4 sortable" data-sort="key" scope="col">Key <span class="sort-ind text-primary" aria-hidden="true"></span></th>
+<th class="px-lg py-4 sortable" data-sort="proyecto" scope="col">Proyecto</th>
+<th class="px-lg py-4 sortable" data-sort="unidad" scope="col">Unidad</th>
+<th class="px-lg py-4 sortable" data-sort="tipo" scope="col">Tipo</th>
+<th class="px-lg py-4 sortable" data-sort="fase" scope="col">Fase</th>
+<th class="px-lg py-4 sortable" data-sort="estado" scope="col">Estado</th>
+<th class="px-lg py-4 text-right sortable" data-sort="valor" scope="col">Captura de Valor</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-outline-variant">
-<tr class="hover:bg-surface-container-low transition-colors duration-150">
-<td class="px-lg py-4 text-body-md font-medium text-on-surface-variant">PM-11</td>
-<td class="px-lg py-4 text-body-md font-bold text-on-surface">Funnel IA</td>
-<td class="px-lg py-4 text-body-md text-on-surface">Áridos</td>
-<td class="px-lg py-4"><span class="bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded-full text-label-md">Agentes de IA</span></td>
-<td class="px-lg py-4 text-body-md">Ejecución</td>
-<td class="px-lg py-4">
-<span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full text-label-md font-bold flex items-center gap-1 w-fit">
-<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Listo</span>
-</td>
-<td class="px-lg py-4 text-body-md font-bold text-right text-on-surface">$420k / $600k</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors duration-150">
-<td class="px-lg py-4 text-body-md font-medium text-on-surface-variant">PM-7</td>
-<td class="px-lg py-4 text-body-md font-bold text-on-surface">Portal Clientes Coactiva<br></td>
-<td class="px-lg py-4 text-body-md text-on-surface">Coactiva</td>
-<td class="px-lg py-4"><span class="bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-full text-label-md">Lanzamiento&nbsp;</span></td>
-<td class="px-lg py-4 text-body-md">Diseño</td>
-<td class="px-lg py-4">
-<span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full text-label-md font-bold flex items-center gap-1 w-fit">
-<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span> Por Hacer</span>
-</td>
-<td class="px-lg py-4 text-body-md font-bold text-right text-on-surface">$120k / $450k</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors duration-150">
-<td class="px-lg py-4 text-body-md font-medium text-on-surface-variant">PM-21</td>
-<td class="px-lg py-4 text-body-md font-bold text-on-surface">App Transportista</td>
-<td class="px-lg py-4 text-body-md text-on-surface">Hormigón</td>
-<td class="px-lg py-4"><span class="bg-secondary-fixed text-on-secondary-fixed px-2 py-0.5 rounded-full text-label-md">Mejora Continua</span></td>
-<td class="px-lg py-4 text-body-md">Testing</td>
-<td class="px-lg py-4">
-<span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full text-label-md font-bold flex items-center gap-1 w-fit">
-<span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>En pausa</span>
-</td>
-<td class="px-lg py-4 text-body-md font-bold text-right text-on-surface">$50k / $300k</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors duration-150">
-<td class="px-lg py-4 text-body-md font-medium text-on-surface-variant">PM-23</td>
-<td class="px-lg py-4 text-body-md font-bold text-on-surface">Portal Corporativo Clientes</td>
-<td class="px-lg py-4 text-body-md text-on-surface">Cemento</td>
-<td class="px-lg py-4"><span class="bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded-full text-label-md">Mejora Continua</span></td>
-<td class="px-lg py-4 text-body-md">Finalizado</td>
-<td class="px-lg py-4">
-<span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-label-md font-bold flex items-center gap-1 w-fit">
-<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>En curso</span>
-</td>
-<td class="px-lg py-4 text-body-md font-bold text-right text-on-surface">$850k / $850k</td>
-</tr>
+<tbody id="projects-tbody" class="divide-y divide-outline-variant">
 </tbody>
 </table>
-<div class="px-lg py-4 border-t border-outline-variant flex justify-between items-center text-body-md text-on-surface-variant">
-<span class="">Mostrando 4 de 23 proyectos</span>
-<div class="flex gap-4">
-<button class="hover:text-primary transition-colors">Anterior</button>
-<button class="hover:text-primary transition-colors font-bold text-on-surface">1</button>
-<button class="hover:text-primary transition-colors">2</button>
-<button class="hover:text-primary transition-colors">Siguiente</button>
+<div class="px-lg py-4 border-t border-outline-variant flex flex-wrap gap-3 justify-between items-center text-body-md text-on-surface-variant">
+<span id="projects-meta">Mostrando 0 de 0 proyectos</span>
+<div class="flex gap-4 items-center">
+<button id="page-prev" type="button" class="hover:text-primary transition-colors disabled:opacity-40 disabled:pointer-events-none">Anterior</button>
+<span id="page-indicator" class="font-bold text-on-surface tabular-nums">1 / 1</span>
+<button id="page-next" type="button" class="hover:text-primary transition-colors disabled:opacity-40 disabled:pointer-events-none">Siguiente</button>
 </div>
 </div>
 </div>
 </main>
+<div id="toast-resumen" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+<script>
+(function () {
+  var PAGE_SIZE = 4;
+  var state = { page: 0, sortKey: 'key', sortDir: 1, q: '', unidad: '', estado: '' };
+
+  function tipoBadge(tipo) {
+    var cls = {
+      'Agentes de IA': 'bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded-full text-label-md',
+      'Lanzamiento': 'bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-full text-label-md',
+      'Mejora Continua': 'bg-secondary-fixed text-on-secondary-fixed px-2 py-0.5 rounded-full text-label-md',
+      'Agente de IA': 'bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded-full text-label-md'
+    };
+    var c = cls[tipo] || cls['Mejora Continua'];
+    return '<span class="' + c + '">' + tipo + '</span>';
+  }
+
+  function estadoBadge(estado) {
+    if (estado === 'Listo') {
+      return '<span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full text-label-md font-bold flex items-center gap-1 w-fit">' +
+        '<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Listo</span>';
+    }
+    if (estado === 'Por Hacer') {
+      return '<span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full text-label-md font-bold flex items-center gap-1 w-fit">' +
+        '<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span> Por Hacer</span>';
+    }
+    if (estado === 'En pausa') {
+      return '<span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full text-label-md font-bold flex items-center gap-1 w-fit">' +
+        '<span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>En pausa</span>';
+    }
+    return '<span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-label-md font-bold flex items-center gap-1 w-fit">' +
+      '<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>En curso</span>';
+  }
+
+  var PROJECTS = [
+    { key: 'PM-11', proyecto: 'Funnel IA', unidad: 'Áridos', tipo: 'Agentes de IA', fase: 'Ejecución', estado: 'Listo', valor: '$420k / $600k', valorSort: 420 },
+    { key: 'PM-7', proyecto: 'Portal Clientes Coactiva', unidad: 'Coactiva', tipo: 'Lanzamiento', fase: 'Diseño', estado: 'Por Hacer', valor: '$120k / $450k', valorSort: 120 },
+    { key: 'PM-21', proyecto: 'App Transportista', unidad: 'Hormigón', tipo: 'Mejora Continua', fase: 'Testing', estado: 'En pausa', valor: '$50k / $300k', valorSort: 50 },
+    { key: 'PM-23', proyecto: 'Portal Corporativo Clientes', unidad: 'Cemento', tipo: 'Mejora Continua', fase: 'Finalizado', estado: 'En curso', valor: '$850k / $850k', valorSort: 850 },
+    { key: 'PM-01', proyecto: 'Agente Contingencia Laboral', unidad: 'Corporativo', tipo: 'Agente de IA', fase: 'Desarrollo', estado: 'En curso', valor: '$1.8M / $3.2M', valorSort: 1800, detalleUrl: 'mockup-proyectos.html' },
+    { key: 'PM-04', proyecto: 'Dashboard Emisiones Planta Norte', unidad: 'Áridos', tipo: 'Mejora Continua', fase: 'Piloto', estado: 'En curso', valor: '$95k / $280k', valorSort: 95 },
+    { key: 'PM-15', proyecto: 'Integración pedidos mayoristas', unidad: 'Cemento', tipo: 'Mejora Continua', fase: 'Ejecución', estado: 'Listo', valor: '$310k / $310k', valorSort: 310 },
+    { key: 'PM-09', proyecto: 'App checklist planta Hormigón', unidad: 'Hormigón', tipo: 'Mejora Continua', fase: 'Diseño', estado: 'Por Hacer', valor: '$40k / $200k', valorSort: 40 },
+    { key: 'PM-30', proyecto: 'Portal autoservicio Coactiva v2', unidad: 'Coactiva', tipo: 'Lanzamiento', fase: 'Ideación', estado: 'En pausa', valor: '$0k / $520k', valorSort: 0 }
+  ];
+
+  function $(id) { return document.getElementById(id); }
+
+  function showToast(msg) {
+    var root = $('toast-resumen');
+    if (!root) return;
+    var el = document.createElement('div');
+    el.className = 'toast-enter pointer-events-auto bg-slate-800 text-white px-lg py-md rounded-lg shadow-lg text-body-md max-w-sm';
+    el.textContent = msg;
+    root.appendChild(el);
+    setTimeout(function () { el.remove(); }, 2800);
+  }
+
+  function parseKey(k) {
+    var m = /^PM-(\d+)$/i.exec((k || '').trim());
+    return m ? parseInt(m[1], 10) : 0;
+  }
+
+  function filtered() {
+    return PROJECTS.filter(function (p) {
+      if (state.unidad && p.unidad !== state.unidad) return false;
+      if (state.estado && p.estado !== state.estado) return false;
+      if (state.q) {
+        var qq = state.q.toLowerCase();
+        if (p.key.toLowerCase().indexOf(qq) === -1 && p.proyecto.toLowerCase().indexOf(qq) === -1 && p.unidad.toLowerCase().indexOf(qq) === -1) return false;
+      }
+      return true;
+    });
+  }
+
+  function sorted(list) {
+    var key = state.sortKey;
+    var dir = state.sortDir;
+    return list.slice().sort(function (a, b) {
+      var va; var vb;
+      if (key === 'valor') { va = a.valorSort; vb = b.valorSort; }
+      else if (key === 'key') { va = parseKey(a.key); vb = parseKey(b.key); }
+      else { va = (a[key] || '').toString().toLowerCase(); vb = (b[key] || '').toString().toLowerCase(); }
+      if (va < vb) return -1 * dir;
+      if (va > vb) return 1 * dir;
+      return 0;
+    });
+  }
+
+  function render() {
+    var list = sorted(filtered());
+    var total = list.length;
+    var pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    if (state.page >= pages) state.page = pages - 1;
+    if (state.page < 0) state.page = 0;
+    var start = state.page * PAGE_SIZE;
+    var slice = list.slice(start, start + PAGE_SIZE);
+    var tb = $('projects-tbody');
+    if (!tb) return;
+    tb.innerHTML = slice.map(function (p) {
+      var url = p.detalleUrl || null;
+      var dataUrl = url ? ' data-url="' + url.replace(/"/g, '') + '"' : '';
+      return '<tr class="row-proj hover:bg-surface-container-low transition-colors duration-150" tabindex="0"' + dataUrl + '>' +
+        '<td class="px-lg py-4 text-body-md font-medium text-on-surface-variant">' + escapeHtml(p.key) + '</td>' +
+        '<td class="px-lg py-4 text-body-md font-bold text-on-surface">' + escapeHtml(p.proyecto) + '</td>' +
+        '<td class="px-lg py-4 text-body-md text-on-surface">' + escapeHtml(p.unidad) + '</td>' +
+        '<td class="px-lg py-4">' + tipoBadge(p.tipo) + '</td>' +
+        '<td class="px-lg py-4 text-body-md">' + escapeHtml(p.fase) + '</td>' +
+        '<td class="px-lg py-4">' + estadoBadge(p.estado) + '</td>' +
+        '<td class="px-lg py-4 text-body-md font-bold text-right text-on-surface">' + escapeHtml(p.valor) + '</td></tr>';
+    }).join('');
+
+    tb.querySelectorAll('tr.row-proj').forEach(function (row) {
+      var go = function () {
+        var u = row.getAttribute('data-url');
+        if (u) window.location.href = u;
+        else showToast('Demo: ficha de proyecto no disponible en este mockup.');
+      };
+      row.addEventListener('click', go);
+      row.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+      });
+    });
+
+    var meta = $('projects-meta');
+    if (meta) {
+      var a = total === 0 ? 0 : start + 1;
+      var b = Math.min(start + PAGE_SIZE, total);
+      var suffix = (state.q || state.unidad || state.estado) ? '' : ' · Cartera total referencia 23';
+      meta.textContent = total
+        ? 'Mostrando ' + a + '–' + b + ' de ' + total + ' proyectos' + suffix
+        : 'Sin resultados con los filtros actuales';
+    }
+    var ind = $('page-indicator');
+    if (ind) ind.textContent = (state.page + 1) + ' / ' + pages;
+    var prev = $('page-prev');
+    var next = $('page-next');
+    if (prev) prev.disabled = state.page <= 0;
+    if (next) next.disabled = state.page >= pages - 1;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function jitterKpis() {
+    var vm = 3.8 + Math.random() * 0.9;
+    var kv = $('kpi-valor');
+    if (kv) kv.textContent = '$' + vm.toFixed(1) + 'M';
+    var jeq = 290 + Math.floor(Math.random() * 55);
+    var kj = $('kpi-jeq');
+    if (kj) kj.textContent = String(jeq);
+  }
+
+  var alertEl = $('alert-stale');
+  $('alert-dismiss') && $('alert-dismiss').addEventListener('click', function () {
+    if (alertEl) { alertEl.style.display = 'none'; showToast('Aviso descartado (solo en esta sesión).'); }
+  });
+
+  $('btn-toggle-filter') && $('btn-toggle-filter').addEventListener('click', function () {
+    var pan = $('filter-panel');
+    if (!pan) return;
+    pan.classList.toggle('hidden');
+  });
+
+  function readFiltersFromDom() {
+    state.q = ($('filter-q') && $('filter-q').value) || '';
+    state.unidad = ($('filter-unidad') && $('filter-unidad').value) || '';
+    state.estado = ($('filter-estado') && $('filter-estado').value) || '';
+  }
+
+  $('filter-apply') && $('filter-apply').addEventListener('click', function () {
+    readFiltersFromDom();
+    state.page = 0;
+    render();
+    showToast('Filtros aplicados.');
+  });
+
+  $('filter-reset') && $('filter-reset').addEventListener('click', function () {
+    if ($('filter-q')) $('filter-q').value = '';
+    if ($('filter-unidad')) $('filter-unidad').value = '';
+    if ($('filter-estado')) $('filter-estado').value = '';
+    state.q = '';
+    state.unidad = '';
+    state.estado = '';
+    state.page = 0;
+    render();
+  });
+
+  $('page-prev') && $('page-prev').addEventListener('click', function () { state.page--; render(); });
+  $('page-next') && $('page-next').addEventListener('click', function () { state.page++; render(); });
+
+  document.querySelectorAll('th.sortable').forEach(function (th) {
+    th.addEventListener('click', function () {
+      var k = th.getAttribute('data-sort');
+      if (!k) return;
+      if (state.sortKey === k) state.sortDir *= -1;
+      else { state.sortKey = k; state.sortDir = 1; }
+      state.page = 0;
+      render();
+    });
+  });
+
+  $('btn-refresh-metrics') && $('btn-refresh-metrics').addEventListener('click', function () {
+    jitterKpis();
+    showToast('Métricas actualizadas (datos de demostración).');
+  });
+
+  render();
+})();
+</script>
 <!-- Footer decoration (Optional corporate feel) -->
 <footer class="mt-xl border-t border-outline-variant py-lg px-margin flex justify-between items-center text-label-md text-on-surface-variant opacity-60">
 <div class="flex items-center gap-2">

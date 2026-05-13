@@ -127,6 +127,12 @@
             vertical-align: middle;
         }
         body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .tab-panel { display: none; }
+        .tab-panel.is-active { display: block; }
+        .toast-enter { animation: toastIn 0.28s ease-out; }
+        @keyframes toastIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .gantt-phase { cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+        .gantt-phase:hover { transform: scaleY(1.08); box-shadow: 0 2px 8px rgba(0,94,164,0.15); }
     </style>
 </head>
 <body class="text-on-background bg-background">
@@ -155,7 +161,7 @@
 <!-- Breadcrumb & Header Actions -->
 <div class="flex flex-col gap-sm">
 <nav class="flex items-center gap-xs text-label-md font-label-md text-outline">
-<span class="hover:text-primary cursor-pointer">Resumen general</span>
+<a class="hover:text-primary cursor-pointer text-inherit no-underline" href="mockup-resumen.html">Resumen general</a>
 <span class="material-symbols-outlined text-[14px]">chevron_right</span>
 <span class="text-on-surface">PM-01</span>
 </nav>
@@ -171,7 +177,7 @@
 </div>
 <p class="font-body-md text-body-md text-on-surface-variant">Optimización de stocks y logística mediante modelos de aprendizaje automático.</p>
 </div>
-<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md flex items-center gap-sm active:scale-95 transition-transform">
+<button id="btn-jira" type="button" class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md flex items-center gap-sm active:scale-95 transition-transform">
                     Ver en Jira
                     <span class="material-symbols-outlined text-lg">open_in_new</span>
 </button>
@@ -186,32 +192,35 @@
 <div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
 <p class="font-label-md text-label-md text-outline uppercase tracking-wider mb-sm">Valor esperado</p>
 <div class="flex items-baseline gap-xs">
-<span class="font-data-num text-data-num text-on-surface">$3.2M</span>
+<span id="kpi-esperado" class="font-data-num text-data-num text-on-surface">$3.2M</span>
 <span class="text-label-md font-label-md text-outline">USD</span>
 </div>
 <div class="mt-md h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-primary" style="width: 100%"></div>
+<div id="kpi-esperado-bar" class="h-full bg-primary transition-all duration-700" style="width: 100%"></div>
 </div>
 </div>
 <div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
 <p class="font-label-md text-label-md text-outline uppercase tracking-wider mb-sm">Valor capturado</p>
 <div class="flex items-baseline gap-xs">
-<span class="font-data-num text-data-num text-on-surface">$1.8M</span>
+<span id="kpi-capturado" class="font-data-num text-data-num text-on-surface">$1.8M</span>
 <span class="text-label-md font-label-md text-outline">USD</span>
 </div>
 <div class="mt-md h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-tertiary-container" style="width: 56%"></div>
+<div id="kpi-capturado-bar" class="h-full bg-tertiary-container transition-all duration-700" style="width: 56%"></div>
 </div>
 </div>
 <div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
 <p class="font-label-md text-label-md text-outline uppercase tracking-wider mb-sm">JEQ</p>
 <div class="flex items-baseline gap-xs">
-<span class="font-data-num text-data-num text-on-surface">140</span>
+<span id="kpi-jeq" class="font-data-num text-data-num text-on-surface">140</span>
 </div>
 <div class="mt-md h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-primary" style="width: 60%"></div>
+<div id="kpi-jeq-bar" class="h-full bg-primary transition-all duration-700" style="width: 60%"></div>
 </div>
 </div>
+</div>
+<div class="flex justify-end">
+<button type="button" id="btn-kpi-demo" class="text-label-md text-primary hover:underline font-medium">Simular variación de métricas (demo)</button>
 </div>
 <!-- Project Timeline -->
 <div class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm">
@@ -227,38 +236,38 @@
 <!-- Gantt Row Item -->
 <div class="grid grid-cols-6 h-8 items-center relative">
 <div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-1 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center px-3">
+<div class="gantt-phase z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-1 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center px-3" title="Ideación — 15 Ene – 28 Feb 2026 (cerrada)" data-phase="Ideación">
 <span class="text-[10px] font-bold text-on-tertiary-fixed-variant truncate">Ideación</span>
 </div>
 </div>
 <div class="grid grid-cols-6 h-8 items-center relative">
 <div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-2 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center px-3">
+<div class="gantt-phase z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-2 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center px-3" title="Planificación — 1 Mar – 20 Mar 2026 (cerrada)" data-phase="Planificación">
 <span class="text-[10px] font-bold text-on-tertiary-fixed-variant truncate">Planificación</span>
 </div>
 </div>
 <div class="grid grid-cols-6 h-8 items-center relative">
 <div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="z-10 bg-primary/20 h-4 rounded-full col-start-3 col-span-1 border border-primary/40 flex items-center px-3">
+<div class="gantt-phase z-10 bg-primary/20 h-4 rounded-full col-start-3 col-span-1 border border-primary/40 flex items-center px-3" title="Diseño — 21 Mar – 10 Abr 2026 (cerrada)" data-phase="Diseño">
 <span class="text-[10px] font-bold text-primary truncate">Diseño</span>
 </div>
 </div>
 <div class="grid grid-cols-6 h-8 items-center relative">
 <div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
 <!-- Current Phase Marker -->
-<div class="z-10 bg-primary h-6 rounded-full col-start-4 col-span-1 shadow-md border border-white flex items-center px-3 ring-4 ring-primary/10">
+<div class="gantt-phase z-10 bg-primary h-6 rounded-full col-start-4 col-span-1 shadow-md border border-white flex items-center px-3 ring-4 ring-primary/10" title="Desarrollo — 11 Abr – 30 May 2026 (en curso, 62% avance)" data-phase="Desarrollo">
 <span class="text-[10px] font-bold text-white truncate">Desarrollo (Actual)</span>
 </div>
 </div>
 <div class="grid grid-cols-6 h-8 items-center relative opacity-50">
 <div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="z-10 bg-outline-variant h-4 rounded-full col-start-5 col-span-1 flex items-center px-3">
+<div class="gantt-phase z-10 bg-outline-variant h-4 rounded-full col-start-5 col-span-1 flex items-center px-3" title="QA — 1 Jun – 20 Jun 2026 (planificada)" data-phase="QA">
 <span class="text-[10px] font-bold text-on-surface-variant truncate">QA</span>
 </div>
 </div>
 <div class="grid grid-cols-6 h-8 items-center relative opacity-50">
 <div class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"></div>
-<div class="z-10 bg-outline-variant h-4 rounded-full col-start-6 col-span-1 flex items-center px-3">
+<div class="gantt-phase z-10 bg-outline-variant h-4 rounded-full col-start-6 col-span-1 flex items-center px-3" title="Despliegue — 21 Jun – 5 Jul 2026 (planificada)" data-phase="Despliegue">
 <span class="text-[10px] font-bold text-on-surface-variant truncate">Despliegue</span>
 </div>
 </div>
@@ -267,13 +276,12 @@
 </div>
 <!-- Epics & Sprint Progress Tabs -->
 <div class="bg-white border border-outline-variant rounded-lg shadow-sm overflow-hidden">
-<div class="flex border-b border-outline-variant">
-<button class="px-lg py-md text-primary border-b-2 border-primary font-semibold text-body-md">Épicas</button>
-<button class="px-lg py-md text-on-surface-variant hover:text-on-surface font-medium text-body-md">Sprint Activo</button>
-<button class="px-lg py-md text-on-surface-variant hover:text-on-surface font-medium text-body-md">Detalles Técnicos</button>
+<div id="project-tabs" class="flex border-b border-outline-variant" role="tablist">
+<button type="button" role="tab" aria-selected="true" data-tab="epicas" class="proj-tab px-lg py-md text-primary border-b-2 border-primary font-semibold text-body-md">Épicas</button>
+<button type="button" role="tab" aria-selected="false" data-tab="sprint" class="proj-tab px-lg py-md text-on-surface-variant hover:text-on-surface font-medium text-body-md border-b-2 border-transparent">Sprint Activo</button>
+<button type="button" role="tab" aria-selected="false" data-tab="tecnicos" class="proj-tab px-lg py-md text-on-surface-variant hover:text-on-surface font-medium text-body-md border-b-2 border-transparent">Detalles Técnicos</button>
 </div>
-<div class="p-lg space-y-md">
-<!-- Epic Progress Bars -->
+<div id="panel-epicas" class="tab-panel is-active p-lg space-y-md" role="tabpanel">
 <div class="space-y-lg">
 <div>
 <div class="flex justify-between items-center mb-sm">
@@ -281,10 +289,10 @@
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">dataset</span>
 <span class="font-body-md font-semibold text-on-surface">Archivos</span>
 </div>
-<span class="text-label-md font-label-md text-outline">100%</span>
+<span id="epic-archivos-pct" class="text-label-md font-label-md text-outline">100%</span>
 </div>
 <div class="h-2 w-full bg-surface-container rounded-full">
-<div class="h-full bg-primary" style="width: 100%"></div>
+<div id="epic-archivos-bar" class="h-full bg-primary transition-all duration-500" style="width: 100%"></div>
 </div>
 </div>
 <div>
@@ -293,10 +301,10 @@
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">insights</span>
 <span class="font-body-md font-semibold text-on-surface">Chat investigador</span>
 </div>
-<span class="text-label-md font-label-md text-outline">65%</span>
+<span id="epic-chat-pct" class="text-label-md font-label-md text-outline">65%</span>
 </div>
 <div class="h-2 w-full bg-surface-container rounded-full">
-<div class="h-full bg-primary" style="width: 65%"></div>
+<div id="epic-chat-bar" class="h-full bg-primary transition-all duration-500" style="width: 65%"></div>
 </div>
 </div>
 <div>
@@ -305,13 +313,21 @@
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">dashboard_customize</span>
 <span class="font-body-md font-semibold text-on-surface">Copilot</span>
 </div>
-<span class="text-label-md font-label-md text-outline">20%</span>
+<span id="epic-copilot-pct" class="text-label-md font-label-md text-outline">20%</span>
 </div>
 <div class="h-2 w-full bg-surface-container rounded-full">
-<div class="h-full bg-primary" style="width: 20%"></div>
+<div id="epic-copilot-bar" class="h-full bg-primary transition-all duration-500" style="width: 20%"></div>
 </div>
 </div>
 </div>
+<p class="text-label-md text-outline pt-sm">Datos de ejemplo para demo; nombres de épicas sin cambios.</p>
+</div>
+<div id="panel-sprint" class="tab-panel p-lg space-y-md" role="tabpanel" hidden>
+<p class="text-body-md text-on-surface-variant mb-md">Sprint 14 · <span class="font-semibold text-on-surface">ARID-ML</span> · 21 puntos comprometidos</p>
+<ul id="sprint-tasks" class="divide-y divide-outline-variant/50 border border-outline-variant rounded-lg overflow-hidden"></ul>
+</div>
+<div id="panel-tecnicos" class="tab-panel p-lg space-y-md" role="tabpanel" hidden>
+<dl id="tecnicos-dl" class="grid grid-cols-1 sm:grid-cols-2 gap-md text-body-md"></dl>
 </div>
 </div>
 </div>
@@ -390,11 +406,11 @@
 <div class="grid grid-cols-2 gap-sm">
 <div class="bg-on-primary-fixed-variant/20 p-sm rounded-lg text-center">
 <p class="text-label-md">Issues</p>
-<p class="text-body-lg font-bold">42</p>
+<p id="jira-issues" class="text-body-lg font-bold">42</p>
 </div>
 <div class="bg-on-primary-fixed-variant/20 p-sm rounded-lg text-center">
 <p class="text-label-md">Backlog</p>
-<p class="text-body-lg font-bold">128</p>
+<p id="jira-backlog" class="text-body-lg font-bold">128</p>
 </div>
 </div>
 </div>
@@ -412,8 +428,142 @@
 </div>
 </div>
 </footer>
+<div id="toast-root" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+<script>
+(function () {
+  var SPRINT = [
+    { id: 'ARID-142', title: 'Ingesta batch documentos RRHH', pts: 5, estado: 'En revisión' },
+    { id: 'ARID-151', title: 'Prompt guardrails Chat investigador', pts: 3, estado: 'En curso' },
+    { id: 'ARID-158', title: 'Métricas JEQ en dashboard interno', pts: 8, estado: 'To Do' },
+    { id: 'ARID-160', title: 'Copilot: plantilla respuesta estándar', pts: 5, estado: 'To Do' }
+  ];
+  var TECNICOS = [
+    { k: 'Repositorio', v: 'bitbucket.org/polpaico/arid-ml-agent (rama develop)' },
+    { k: 'Runtime', v: 'Python 3.11 · contenedor AKS · región Chile Central' },
+    { k: 'Modelos', v: 'Embeddings corporativos + LLM vía API privada' },
+    { k: 'Datos sensibles', v: 'PII enmascarada; retención 90 días en staging' },
+    { k: 'Último despliegue', v: 'Build #284 — hace 2 días (QA)' },
+    { k: 'Contacto soporte', v: 'squad-data@polpaico.demo' }
+  ];
 
+  function $(id) { return document.getElementById(id); }
 
+  var tabs = document.querySelectorAll('.proj-tab');
+  var panels = {
+    epicas: $('panel-epicas'),
+    sprint: $('panel-sprint'),
+    tecnicos: $('panel-tecnicos')
+  };
 
+  tabs.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var name = btn.getAttribute('data-tab');
+      tabs.forEach(function (b) {
+        var on = b.getAttribute('data-tab') === name;
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+        b.classList.toggle('text-primary', on);
+        b.classList.toggle('border-primary', on);
+        b.classList.toggle('border-b-2', true);
+        b.classList.toggle('font-semibold', on);
+        b.classList.toggle('text-on-surface-variant', !on);
+        b.classList.toggle('font-medium', !on);
+        b.classList.toggle('border-transparent', !on);
+      });
+      Object.keys(panels).forEach(function (key) {
+        var p = panels[key];
+        if (!p) return;
+        var active = key === name;
+        p.classList.toggle('is-active', active);
+        p.hidden = !active;
+      });
+    });
+  });
 
+  var ul = $('sprint-tasks');
+  if (ul) {
+    ul.innerHTML = SPRINT.map(function (t) {
+      return '<li class="flex items-center justify-between gap-md px-md py-sm bg-surface-container-low/50 hover:bg-surface-container-low transition-colors">' +
+        '<span class="text-label-md text-primary font-mono shrink-0">' + t.id + '</span>' +
+        '<span class="text-body-md text-on-surface flex-1 min-w-0">' + t.title + '</span>' +
+        '<span class="text-label-md text-outline shrink-0">' + t.pts + ' pt</span>' +
+        '<span class="text-label-md font-medium text-on-surface-variant shrink-0">' + t.estado + '</span></li>';
+    }).join('');
+  }
+
+  var dl = $('tecnicos-dl');
+  if (dl) {
+    dl.innerHTML = TECNICOS.map(function (row) {
+      return '<div class="border border-outline-variant rounded-lg p-md bg-surface-container-low/30">' +
+        '<dt class="text-label-md text-outline uppercase tracking-wider">' + row.k + '</dt>' +
+        '<dd class="mt-xs text-on-surface font-medium">' + row.v + '</dd></div>';
+    }).join('');
+  }
+
+  function showToast(msg) {
+    var root = $('toast-root');
+    if (!root) return;
+    var el = document.createElement('div');
+    el.className = 'toast-enter pointer-events-auto bg-inverse-surface text-inverse-on-surface px-lg py-md rounded-lg shadow-lg text-body-md max-w-sm';
+    el.textContent = msg;
+    root.appendChild(el);
+    setTimeout(function () { el.remove(); }, 3200);
+  }
+
+  var btnJira = $('btn-jira');
+  if (btnJira) {
+    btnJira.addEventListener('click', function () {
+      showToast('Demo: enlace a Jira (ARID-ML) simulado.');
+    });
+  }
+
+  var btnKpi = $('btn-kpi-demo');
+  if (btnKpi) {
+    btnKpi.addEventListener('click', function () {
+      jitterKpis();
+      showToast('Métricas regeneradas (solo demo).');
+    });
+  }
+
+  function jitterKpis() {
+    var esperado = 3.05 + Math.random() * 0.35;
+    var ratio = 0.52 + Math.random() * 0.12;
+    var capturado = esperado * ratio;
+    var jeq = 128 + Math.floor(Math.random() * 36);
+    var ke = $('kpi-esperado');
+    var kc = $('kpi-capturado');
+    var kj = $('kpi-jeq');
+    var kcb = $('kpi-capturado-bar');
+    var kjb = $('kpi-jeq-bar');
+    if (ke) ke.textContent = '$' + esperado.toFixed(1) + 'M';
+    if (kc) kc.textContent = '$' + capturado.toFixed(1) + 'M';
+    if (kj) kj.textContent = String(jeq);
+    if (kcb) kcb.style.width = Math.round(ratio * 100) + '%';
+    if (kjb) kjb.style.width = Math.min(100, Math.round((jeq / 200) * 100)) + '%';
+    var issues = 38 + Math.floor(Math.random() * 12);
+    var backlog = 115 + Math.floor(Math.random() * 28);
+    var ji = $('jira-issues');
+    var jb = $('jira-backlog');
+    if (ji) ji.textContent = String(issues);
+    if (jb) jb.textContent = String(backlog);
+    var chat = 58 + Math.floor(Math.random() * 18);
+    var copilot = 15 + Math.floor(Math.random() * 12);
+    var ecp = $('epic-chat-pct');
+    var ecb = $('epic-chat-bar');
+    var epp = $('epic-copilot-pct');
+    var epb = $('epic-copilot-bar');
+    if (ecp) ecp.textContent = chat + '%';
+    if (ecb) ecb.style.width = chat + '%';
+    if (epp) epp.textContent = copilot + '%';
+    if (epb) epb.style.width = copilot + '%';
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'r' && e.ctrlKey) {
+      e.preventDefault();
+      jitterKpis();
+      showToast('KPI actualizados (datos demo, Ctrl+R).');
+    }
+  });
+})();
+</script>
 </body></html>
