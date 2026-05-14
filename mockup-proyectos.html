@@ -192,13 +192,13 @@
           transform: translateY(0);
         }
       }
-      .gantt-phase {
+      .gantt-etapa {
         cursor: pointer;
         transition:
           transform 0.15s ease,
           box-shadow 0.15s ease;
       }
-      .gantt-phase:hover {
+      .gantt-etapa:hover {
         transform: scaleY(1.08);
         box-shadow: 0 2px 8px rgba(0, 94, 164, 0.15);
       }
@@ -421,7 +421,7 @@
             class="bg-white border border-outline-variant p-lg rounded-lg shadow-sm"
           >
             <h3 class="font-h3 text-h3 text-on-surface mb-lg">
-              Cronograma de Fases
+              Cronograma de Etapas del Proyecto
             </h3>
             <div class="relative pt-xs">
               <div
@@ -433,34 +433,14 @@
                 <span class="">Q4 2026</span>
               </div>
               <div class="space-y-4">
-                <!-- Gantt Row Item -->
                 <div class="grid grid-cols-6 h-8 items-center relative">
                   <div
                     class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
                   ></div>
                   <div
-                    class="gantt-phase z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-1 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center justify-between gap-1 px-2 w-full min-w-0"
-                    title="Ideación — 15 Ene – 28 Feb 2026 (cerrada, 100%)"
-                    data-phase="Ideación"
-                  >
-                    <span
-                      class="text-[10px] font-bold text-on-tertiary-fixed-variant truncate min-w-0"
-                      >Ideación</span
-                    >
-                    <span
-                      class="text-[9px] font-semibold text-on-tertiary-fixed-variant flex-shrink-0 tabular-nums"
-                      >100%</span
-                    >
-                  </div>
-                </div>
-                <div class="grid grid-cols-6 h-8 items-center relative">
-                  <div
-                    class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
-                  ></div>
-                  <div
-                    class="gantt-phase z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-2 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center justify-between gap-1 px-2 w-full min-w-0"
-                    title="Planificación — 1 Mar – 20 Mar 2026 (cerrada, 100%)"
-                    data-phase="Planificación"
+                    class="gantt-etapa z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-1 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center justify-between gap-1 px-2 w-full min-w-0"
+                    title="Planificación — 15 Ene – 28 Feb 2026 (cerrada, 100%)"
+                    data-etapa="Planificación"
                   >
                     <span
                       class="text-[10px] font-bold text-on-tertiary-fixed-variant truncate min-w-0"
@@ -477,12 +457,31 @@
                     class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
                   ></div>
                   <div
-                    class="gantt-phase z-10 bg-primary/20 h-4 rounded-full col-start-3 col-span-1 border border-primary/40 flex items-center justify-between gap-1 px-2 w-full min-w-0"
-                    title="Diseño — 21 Mar – 10 Abr 2026 (cerrada, 100%)"
-                    data-phase="Diseño"
+                    class="gantt-etapa z-10 bg-on-tertiary-fixed-variant/20 h-4 rounded-full col-start-2 col-span-1 border border-on-tertiary-fixed-variant/40 flex items-center justify-between gap-1 px-2 w-full min-w-0"
+                    title="Diseño — 1 Mar – 10 Abr 2026 (cerrada, 100%)"
+                    data-etapa="Diseño"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-on-tertiary-fixed-variant truncate min-w-0"
+                      >Diseño</span
+                    >
+                    <span
+                      class="text-[9px] font-semibold text-on-tertiary-fixed-variant flex-shrink-0 tabular-nums"
+                      >100%</span
+                    >
+                  </div>
+                </div>
+                <div class="grid grid-cols-6 h-8 items-center relative">
+                  <div
+                    class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
+                  ></div>
+                  <div
+                    class="gantt-etapa z-10 bg-primary/20 h-4 rounded-full col-start-3 col-span-1 border border-primary/40 flex items-center justify-between gap-1 px-2 w-full min-w-0"
+                    title="Piloto — 11 Abr – 31 May 2026 (cerrada, 100%)"
+                    data-etapa="Piloto"
                   >
                     <span class="text-[10px] font-bold text-primary truncate min-w-0"
-                      >Diseño</span
+                      >Piloto</span
                     >
                     <span
                       class="text-[9px] font-semibold text-primary flex-shrink-0 tabular-nums"
@@ -494,14 +493,13 @@
                   <div
                     class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
                   ></div>
-                  <!-- Current Phase Marker -->
                   <div
-                    class="gantt-phase z-10 bg-primary h-6 rounded-full col-start-4 col-span-1 shadow-md border border-white flex items-center justify-between gap-1 px-2 w-full min-w-0 ring-4 ring-primary/10"
-                    title="Desarrollo — 11 Abr – 30 May 2026 (en curso, 62% avance)"
-                    data-phase="Desarrollo"
+                    class="gantt-etapa z-10 bg-primary h-6 rounded-full col-start-4 col-span-1 shadow-md border border-white flex items-center justify-between gap-1 px-2 w-full min-w-0 ring-4 ring-primary/10"
+                    title="Roll Out — 1 Jun – 15 Ago 2026 (en curso, 62% avance)"
+                    data-etapa="Roll Out"
                   >
                     <span class="text-[10px] font-bold text-white truncate min-w-0"
-                      >Desarrollo (Actual)</span
+                      >Roll Out (Actual)</span
                     >
                     <span
                       class="text-[9px] font-semibold text-white flex-shrink-0 tabular-nums"
@@ -516,13 +514,13 @@
                     class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
                   ></div>
                   <div
-                    class="gantt-phase z-10 bg-outline-variant h-4 rounded-full col-start-5 col-span-1 flex items-center justify-between gap-1 px-2 w-full min-w-0"
-                    title="QA — 1 Jun – 20 Jun 2026 (planificada, 0%)"
-                    data-phase="QA"
+                    class="gantt-etapa z-10 bg-outline-variant h-4 rounded-full col-start-5 col-span-1 flex items-center justify-between gap-1 px-2 w-full min-w-0"
+                    title="Entrega — 16 Ago – 30 Sep 2026 (planificada, 0%)"
+                    data-etapa="Entrega"
                   >
                     <span
                       class="text-[10px] font-bold text-on-surface-variant truncate min-w-0"
-                      >QA</span
+                      >Entrega</span
                     >
                     <span
                       class="text-[9px] font-semibold text-on-surface-variant flex-shrink-0 tabular-nums"
@@ -537,13 +535,13 @@
                     class="absolute left-0 right-0 h-2 bg-surface-container-low rounded-full"
                   ></div>
                   <div
-                    class="gantt-phase z-10 bg-outline-variant h-4 rounded-full col-start-6 col-span-1 flex items-center justify-between gap-1 px-2 w-full min-w-0"
-                    title="Despliegue — 21 Jun – 5 Jul 2026 (planificada, 0%)"
-                    data-phase="Despliegue"
+                    class="gantt-etapa z-10 bg-outline-variant h-4 rounded-full col-start-6 col-span-1 flex items-center justify-between gap-1 px-2 w-full min-w-0"
+                    title="Mejora Continua — 1 Oct – 31 Dic 2026 (planificada, 0%)"
+                    data-etapa="Mejora Continua"
                   >
                     <span
                       class="text-[10px] font-bold text-on-surface-variant truncate min-w-0"
-                      >Despliegue</span
+                      >Mejora cont.</span
                     >
                     <span
                       class="text-[9px] font-semibold text-on-surface-variant flex-shrink-0 tabular-nums"

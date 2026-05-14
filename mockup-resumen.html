@@ -1034,8 +1034,8 @@
               <th class="px-lg py-4 sortable" data-sort="tipo" scope="col">
                 Tipo
               </th>
-              <th class="px-lg py-4 sortable" data-sort="fase" scope="col">
-                Fase
+              <th class="px-lg py-4 sortable" data-sort="etapa" scope="col">
+                Etapa
               </th>
               <th class="px-lg py-4 sortable" data-sort="estado" scope="col">
                 Estado
@@ -1114,6 +1114,17 @@
           return '<span class="' + c + '">' + tipo + "</span>";
         }
 
+        function etapaChip(etapa) {
+          var t = (etapa || "").toString();
+          return (
+            '<span class="inline-flex items-center max-w-full truncate bg-surface-container-high text-on-surface border border-outline-variant/80 px-2.5 py-1 rounded-md text-body-md font-semibold" title="' +
+            escapeHtml(t) +
+            '">' +
+            escapeHtml(t) +
+            "</span>"
+          );
+        }
+
         function estadoBadge(estado) {
           if (estado === "Listo") {
             return (
@@ -1152,7 +1163,7 @@
             proyecto: "Asistente Whatsapp HPM",
             unidad: "Hormigón",
             tipo: "Mejora Continua",
-            fase: "Ejecución",
+            etapa: "Mejora Continua",
             estado: "En curso",
             valor: "$180k / $320k",
             valorSort: 180,
@@ -1162,7 +1173,7 @@
             proyecto: "Deloitte Hub",
             unidad: "Hormigón",
             tipo: "Lanzamiento",
-            fase: "Diseño",
+            etapa: "Diseño",
             estado: "Por Hacer",
             valor: "$60k / $400k",
             valorSort: 60,
@@ -1172,7 +1183,7 @@
             proyecto: "SOFOFA Hub",
             unidad: "Corporativo",
             tipo: "Lanzamiento",
-            fase: "Ideación",
+            etapa: "Planificación",
             estado: "En curso",
             valor: "$90k / $250k",
             valorSort: 90,
@@ -1182,7 +1193,7 @@
             proyecto: "ANID y FONDEF",
             unidad: "Corporativo",
             tipo: "Mejora Continua",
-            fase: "Planificación",
+            etapa: "Planificación",
             estado: "Por Hacer",
             valor: "$0k / $600k",
             valorSort: 0,
@@ -1192,7 +1203,7 @@
             proyecto: "Pago Express Áridos",
             unidad: "Áridos",
             tipo: "Mejora Continua",
-            fase: "Piloto",
+            etapa: "Piloto",
             estado: "En curso",
             valor: "$210k / $280k",
             valorSort: 210,
@@ -1202,7 +1213,7 @@
             proyecto: "Portal Clientes Coactiva",
             unidad: "Coactiva",
             tipo: "Lanzamiento",
-            fase: "Diseño",
+            etapa: "Diseño",
             estado: "Por Hacer",
             valor: "$120k / $450k",
             valorSort: 120,
@@ -1212,7 +1223,7 @@
             proyecto: "Alo Polpaico",
             unidad: "Corporativo",
             tipo: "Mejora Continua",
-            fase: "Ejecución",
+            etapa: "Mejora Continua",
             estado: "En curso",
             valor: "$340k / $500k",
             valorSort: 340,
@@ -1222,7 +1233,7 @@
             proyecto: "Nuevos Negocios: UHPC",
             unidad: "Cemento",
             tipo: "Lanzamiento",
-            fase: "Ideación",
+            etapa: "Planificación",
             estado: "Por Hacer",
             valor: "$25k / $900k",
             valorSort: 25,
@@ -1232,7 +1243,7 @@
             proyecto: "Polpaico Construcción e Industria",
             unidad: "Corporativo",
             tipo: "Lanzamiento",
-            fase: "Planificación",
+            etapa: "Planificación",
             estado: "En curso",
             valor: "$150k / $1.1M",
             valorSort: 150,
@@ -1242,7 +1253,7 @@
             proyecto: "Funnel IA",
             unidad: "Áridos",
             tipo: "Agentes de IA",
-            fase: "Ejecución",
+            etapa: "Entrega",
             estado: "Listo",
             valor: "$420k / $600k",
             valorSort: 420,
@@ -1252,7 +1263,7 @@
             proyecto: "App Maestro Cemento",
             unidad: "Cemento",
             tipo: "Mejora Continua",
-            fase: "Cerrado",
+            etapa: "Entrega",
             estado: "Inactivo",
             valor: "$0k / $200k",
             valorSort: 0,
@@ -1263,7 +1274,7 @@
             proyecto: "Venta Contado Express HPM",
             unidad: "Hormigón",
             tipo: "Mejora Continua",
-            fase: "Cerrado",
+            etapa: "Entrega",
             estado: "Inactivo",
             valor: "$0k / $150k",
             valorSort: 0,
@@ -1274,7 +1285,7 @@
             proyecto: "Nuevos Negocios: INNSPIRAL",
             unidad: "Corporativo",
             tipo: "Lanzamiento",
-            fase: "Cerrado",
+            etapa: "Entrega",
             estado: "Inactivo",
             valor: "$0k / $800k",
             valorSort: 0,
@@ -1285,7 +1296,7 @@
             proyecto: "Piloto Sales IA",
             unidad: "Áridos",
             tipo: "Agentes de IA",
-            fase: "Cerrado",
+            etapa: "Entrega",
             estado: "Inactivo",
             valor: "$80k / $300k",
             valorSort: 80,
@@ -1296,7 +1307,7 @@
             proyecto: "Portal Clientes Hormigones",
             unidad: "Hormigón",
             tipo: "Mejora Continua",
-            fase: "Desarrollo",
+            etapa: "Roll Out",
             estado: "En curso",
             valor: "$290k / $520k",
             valorSort: 290,
@@ -1306,7 +1317,7 @@
             proyecto: "Portal Clientes Áridos",
             unidad: "Áridos",
             tipo: "Mejora Continua",
-            fase: "Testing",
+            etapa: "Roll Out",
             estado: "En curso",
             valor: "$175k / $400k",
             valorSort: 175,
@@ -1316,7 +1327,7 @@
             proyecto: "Mesa de IA",
             unidad: "Corporativo",
             tipo: "Agentes de IA",
-            fase: "Ejecución",
+            etapa: "Roll Out",
             estado: "En curso",
             valor: "$500k / $900k",
             valorSort: 500,
@@ -1326,7 +1337,7 @@
             proyecto: "Mesa Madurez Digital",
             unidad: "Corporativo",
             tipo: "Mejora Continua",
-            fase: "Piloto",
+            etapa: "Piloto",
             estado: "En curso",
             valor: "$220k / $480k",
             valorSort: 220,
@@ -1336,7 +1347,7 @@
             proyecto: "Asistente WhatsApp IA Cemento",
             unidad: "Cemento",
             tipo: "Agente de IA",
-            fase: "Desarrollo",
+            etapa: "Roll Out",
             estado: "En curso",
             valor: "$95k / $360k",
             valorSort: 95,
@@ -1346,7 +1357,7 @@
             proyecto: "App Transportista HPM",
             unidad: "Hormigón",
             tipo: "Mejora Continua",
-            fase: "Testing",
+            etapa: "Roll Out",
             estado: "En pausa",
             valor: "$50k / $300k",
             valorSort: 50,
@@ -1356,7 +1367,7 @@
             proyecto: "App Transportista Áridos",
             unidad: "Áridos",
             tipo: "Mejora Continua",
-            fase: "Ejecución",
+            etapa: "Mejora Continua",
             estado: "En curso",
             valor: "$140k / $310k",
             valorSort: 140,
@@ -1366,7 +1377,7 @@
             proyecto: "Portal Clientes Polpaico Cemento",
             unidad: "Cemento",
             tipo: "Mejora Continua",
-            fase: "Finalizado",
+            etapa: "Entrega",
             estado: "En curso",
             valor: "$850k / $850k",
             valorSort: 850,
@@ -1379,7 +1390,7 @@
             key: "PM-2",
             start: 2,
             len: 12,
-            label: "Ejecución",
+            label: "Mejora Continua",
             tone: "primary",
           },
           { key: "PM-3", start: 10, len: 7, label: "Diseño", tone: "tertiary" },
@@ -1387,7 +1398,7 @@
             key: "PM-4",
             start: 0,
             len: 5,
-            label: "Cerrado 25",
+            label: "Entrega",
             tone: "secondary",
           },
           {
@@ -1402,50 +1413,56 @@
             key: "PM-7",
             start: 11,
             len: 8,
-            label: "Desarrollo",
+            label: "Roll Out",
             tone: "tertiary",
           },
           {
             key: "PM-8",
             start: 1,
             len: 11,
-            label: "Operación",
+            label: "Mejora Continua",
             tone: "primary",
           },
           {
             key: "PM-9",
             start: 14,
             len: 6,
-            label: "Ideación",
+            label: "Planificación",
             tone: "tertiary",
           },
           {
             key: "PM-10",
             start: 12,
             len: 10,
-            label: "FASE 2",
+            label: "Roll Out",
             tone: "primary",
           },
-          { key: "PM-11", start: 5, len: 8, label: "FASE 1", tone: "primary" },
-          { key: "PM-12", start: 0, len: 4, label: "Cerrado", tone: "muted" },
-          { key: "PM-13", start: 2, len: 4, label: "Cerrado", tone: "muted" },
-          { key: "PM-14", start: 4, len: 5, label: "Cerrado", tone: "muted" },
-          { key: "PM-15", start: 6, len: 4, label: "Cerrado", tone: "muted" },
+          { key: "PM-11", start: 5, len: 8, label: "Entrega", tone: "primary" },
+          { key: "PM-12", start: 0, len: 4, label: "Entrega", tone: "muted" },
+          { key: "PM-13", start: 2, len: 4, label: "Entrega", tone: "muted" },
+          { key: "PM-14", start: 4, len: 5, label: "Entrega", tone: "muted" },
+          { key: "PM-15", start: 6, len: 4, label: "Entrega", tone: "muted" },
           {
             key: "PM-16",
             start: 13,
             len: 8,
-            label: "Desarrollo",
+            label: "Roll Out",
             tone: "primary",
           },
           {
             key: "PM-17",
             start: 15,
             len: 7,
-            label: "Testing",
+            label: "Roll Out",
             tone: "secondary",
           },
-          { key: "PM-18", start: 8, len: 12, label: "CoE IA", tone: "primary" },
+          {
+            key: "PM-18",
+            start: 8,
+            len: 12,
+            label: "Roll Out",
+            tone: "primary",
+          },
           {
             key: "PM-19",
             start: 9,
@@ -1457,22 +1474,28 @@
             key: "PM-20",
             start: 16,
             len: 6,
-            label: "Despliegue",
+            label: "Roll Out",
             tone: "tertiary",
           },
           {
             key: "PM-21",
             start: 12,
             len: 6,
-            label: "Pausa",
+            label: "Roll Out",
             tone: "secondary",
           },
-          { key: "PM-22", start: 17, len: 5, label: "Rutas", tone: "primary" },
+          {
+            key: "PM-22",
+            start: 17,
+            len: 5,
+            label: "Mejora Continua",
+            tone: "primary",
+          },
           {
             key: "PM-23",
             start: 9,
             len: 7,
-            label: "Cierre",
+            label: "Entrega",
             tone: "secondary",
           },
         ];
@@ -1525,7 +1548,8 @@
               if (
                 p.key.toLowerCase().indexOf(qq) === -1 &&
                 p.proyecto.toLowerCase().indexOf(qq) === -1 &&
-                p.unidad.toLowerCase().indexOf(qq) === -1
+                p.unidad.toLowerCase().indexOf(qq) === -1 &&
+                (p.etapa || "").toLowerCase().indexOf(qq) === -1
               )
                 return false;
             }
@@ -1588,8 +1612,8 @@
                 '<td class="px-lg py-4">' +
                 tipoBadge(p.tipo) +
                 "</td>" +
-                '<td class="px-lg py-4 text-body-md">' +
-                escapeHtml(p.fase) +
+                '<td class="px-lg py-4">' +
+                etapaChip(p.etapa) +
                 "</td>" +
                 '<td class="px-lg py-4">' +
                 estadoBadge(p.estado) +
