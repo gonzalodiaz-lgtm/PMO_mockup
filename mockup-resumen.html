@@ -891,7 +891,7 @@
         >
           <div
             id="gantt-hitos"
-            class="min-w-[960px] min-h-[80px] bg-surface-container-lowest"
+            class="min-w-[960px] min-h-[120px] bg-surface-container-lowest"
           ></div>
         </div>
         <div
@@ -1384,7 +1384,7 @@
           },
         ];
 
-        /* Hitos demo: g.start y g.len en meses desde ene-2025 (0). Solo se pinta el tramo que intersecta 2026 (meses 12–23). */
+        /* Hitos demo: g.start y g.len en meses desde ene-2025 (0). Vista Gantt: solo calendario 2026 (meses absolutos 12–23). */
         var GANTT_SPEC = [
           {
             key: "PM-2",
@@ -1690,54 +1690,49 @@
           var gStart = state.ganttPage * PAGE_SIZE;
           var slice = list.slice(gStart, gStart + PAGE_SIZE);
 
-          var months = 12;
-          var MN = [
-            "ENE",
-            "FEB",
-            "MAR",
-            "ABR",
-            "MAY",
-            "JUN",
-            "JUL",
-            "AGO",
-            "SEP",
-            "OCT",
-            "NOV",
-            "DIC",
+          /* Solo año 2026: ene–dic (índices absolutos 12–24 desde ene-2025). */
+          var VIEW_MONTHS = 12;
+          var VIEW_START_ABS = 12;
+          var VIEW_END_ABS = VIEW_START_ABS + VIEW_MONTHS;
+          var monthHdr = [
+            "ene",
+            "feb",
+            "mar",
+            "abr",
+            "may",
+            "jun",
+            "jul",
+            "ago",
+            "sep",
+            "oct",
+            "nov",
+            "dic",
           ];
           var headerCells = "";
           var mi;
-          for (mi = 0; mi < months; mi++) {
+          for (mi = 0; mi < VIEW_MONTHS; mi++) {
             headerCells +=
               '<div class="flex-1 min-w-[2.5rem] text-center text-[11px] font-medium text-on-surface-variant border-l border-outline-variant/50 py-2 leading-tight">' +
-              '<span class="block">' +
-              MN[mi] +
-              '</span><span class="text-[9px] opacity-70">2026</span></div>';
+              '<span class="block capitalize tracking-tight">' +
+              monthHdr[mi] +
+              "</span></div>";
           }
 
-          var toneClass = {
-            primary:
-              "bg-primary-container/25 border-x-2 border-primary-container text-on-primary-container",
-            tertiary:
-              "bg-tertiary-container/25 border-x-2 border-tertiary-container text-on-tertiary-container",
-            secondary:
-              "bg-secondary-container/90 border-x-2 border-secondary text-on-secondary",
-            muted: "bg-slate-400/40 border-x-2 border-slate-500 text-slate-800",
-          };
+          var yearBand =
+            '<div class="w-full border-b border-outline-variant/40 bg-primary/10 py-2 text-center text-[12px] font-semibold text-primary tracking-wide">2026</div>';
 
-          var todayIdx = 4;
-          var todayPct = (todayIdx / months) * 100;
-          var monthPct = 100 / months;
+          var todayAbs = 16;
+          var todayPct =
+            ((todayAbs - VIEW_START_ABS) / VIEW_MONTHS) * 100;
+          var monthPct = 100 / VIEW_MONTHS;
 
-          function clipToYear2026(g) {
-            var winStart = 12;
-            var winEnd = 24;
+          function clipToGanttWindow(g) {
             var absEnd = g.start + g.len;
-            var segStart = Math.max(g.start, winStart);
-            var segEnd = Math.min(absEnd, winEnd);
+            var segStart = Math.max(g.start, VIEW_START_ABS);
+            var segEnd = Math.min(absEnd, VIEW_END_ABS);
             if (segEnd <= segStart) return null;
             return {
-              start: segStart - 12,
+              start: segStart - VIEW_START_ABS,
               len: segEnd - segStart,
               label: g.label,
               tone: g.tone,
@@ -1749,36 +1744,45 @@
                 .map(function (p) {
                   var g = p.gantt;
                   var strike = p.inactivo ? " line-through opacity-75" : "";
-                  var seg = g ? clipToYear2026(g) : null;
+                  var seg = g ? clipToGanttWindow(g) : null;
                   var barHtml = "";
                   if (seg) {
-                    var tc =
-                      p.inactivo || seg.tone === "muted"
-                        ? toneClass.muted
-                        : toneClass[seg.tone] || toneClass.primary;
-                    var start = Math.max(0, Math.min(months - 1, seg.start));
-                    var len = Math.max(1, Math.min(months - start, seg.len));
-                    var left = (start / months) * 100;
-                    var w = (len / months) * 100;
+                    var inactive =
+                      p.inactivo || seg.tone === "muted";
+                    var barTone = inactive
+                      ? "bg-slate-500 border border-slate-600 text-white"
+                      : "bg-primary border border-[#004a82] text-white shadow-sm";
+                    var start = Math.max(
+                      0,
+                      Math.min(VIEW_MONTHS - 1, seg.start)
+                    );
+                    var len = Math.max(
+                      1,
+                      Math.min(VIEW_MONTHS - start, seg.len)
+                    );
+                    var left = (start / VIEW_MONTHS) * 100;
+                    var w = (len / VIEW_MONTHS) * 100;
                     barHtml =
-                      '<div class="absolute top-1/2 -translate-y-1/2 z-[2] h-6 rounded flex items-center px-1.5 min-w-[4px] ' +
-                      tc +
+                      '<div class="absolute top-1/2 -translate-y-1/2 z-[2] h-7 rounded-sm flex items-center px-2 min-w-[6px] ' +
+                      barTone +
                       '" style="left:' +
                       left +
                       "%;width:" +
                       w +
-                      '%">' +
-                      '<span class="text-[9px] font-bold uppercase tracking-tight truncate">' +
+                      '%" title="' +
+                      escapeHtml(seg.label) +
+                      '">' +
+                      '<span class="text-[10px] font-semibold leading-tight truncate drop-shadow-sm">' +
                       escapeHtml(seg.label) +
                       "</span></div>";
                   } else {
                     barHtml =
                       '<div class="absolute inset-0 z-[2] flex items-center justify-center px-3 pointer-events-none">' +
-                      '<span class="text-label-md text-on-surface-variant">Sin actividad este año</span></div>';
+                      '<span class="text-label-md text-on-surface-variant">Sin hitos en 2026</span></div>';
                   }
                   return (
                     '<div class="flex items-stretch border-b border-outline-variant/60 hover:bg-surface-container-low/50">' +
-                    '<div class="sticky left-0 z-20 w-[14rem] shrink-0 px-3 py-2.5 bg-surface-container-lowest border-r border-outline-variant flex flex-col justify-center shadow-[6px_0_14px_-8px_rgba(24,28,33,0.15)]">' +
+                    '<div class="sticky left-0 z-20 w-[14rem] shrink-0 px-3 py-3 bg-surface-container-lowest border-r border-outline-variant flex flex-col justify-center shadow-[6px_0_14px_-8px_rgba(24,28,33,0.15)]">' +
                     '<span class="text-label-md font-mono text-primary leading-none mb-1">' +
                     escapeHtml(p.key) +
                     "</span>" +
@@ -1789,16 +1793,16 @@
                     '">' +
                     escapeHtml(p.proyecto) +
                     "</span></div>" +
-                    '<div class="relative h-12 flex-1 min-w-[720px] bg-surface-container-low/55" style="background-image: repeating-linear-gradient(90deg, transparent, transparent calc(' +
+                    '<div class="relative h-14 flex-1 min-w-[720px] bg-white" style="background-image: repeating-linear-gradient(90deg, transparent, transparent calc(' +
                     monthPct +
-                    "% - 1px), rgba(0,94,164,0.06) calc(" +
+                    "% - 1px), rgba(0,94,164,0.07) calc(" +
                     monthPct +
-                    "% - 1px), rgba(0,94,164,0.06) " +
+                    "% - 1px), rgba(0,94,164,0.07) " +
                     monthPct +
                     '%)">' +
-                    '<div class="absolute top-0 bottom-0 w-px bg-primary/55 z-[1] pointer-events-none" style="left:' +
+                    '<div class="absolute top-0 bottom-0 w-0.5 bg-amber-500/90 z-[1] pointer-events-none shadow-sm" style="left:' +
                     todayPct +
-                    '%" title="Referencia: mayo 2026"></div>' +
+                    '%" title="Hoy (referencia demo: mayo 2026)"></div>' +
                     barHtml +
                     "</div></div>"
                   );
@@ -1807,16 +1811,19 @@
             : '<div class="px-4 py-10 text-body-md text-on-surface-variant text-center border-b border-outline-variant/40">Sin proyectos con los filtros actuales.</div>';
 
           var corner =
-            '<div class="sticky left-0 z-30 w-[14rem] shrink-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col justify-end px-3 py-2 text-label-md text-on-surface-variant uppercase tracking-wider">' +
-            '<span>Proyecto</span><span class="text-[9px] font-normal normal-case opacity-70 mt-0.5">Eje temporal 2026</span></div>';
+            '<div class="sticky left-0 z-30 w-[14rem] shrink-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col justify-center px-3 py-2.5 min-h-[4.5rem]">' +
+            '<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Proyecto</span>' +
+            '<span class="text-[10px] font-normal normal-case text-on-surface-variant/90 mt-1 leading-snug">Carta Gantt — solo año 2026</span></div>';
 
           root.innerHTML =
-            '<div class="min-w-[944px]">' +
+            '<div class="min-w-[960px]">' +
             '<div class="flex border-b-2 border-outline-variant bg-surface-container-low/70">' +
             corner +
-            '<div class="flex min-w-[720px] flex-1">' +
+            '<div class="flex flex-col flex-1 min-w-[720px]">' +
+            yearBand +
+            '<div class="flex w-full">' +
             headerCells +
-            "</div></div>" +
+            "</div></div></div>" +
             rows + "</div>";
 
           var gm = $("gantt-meta");
