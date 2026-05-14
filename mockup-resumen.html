@@ -217,13 +217,212 @@
           transform: translateY(0);
         }
       }
+
+      /* Animaciones página resumen */
+      @keyframes resFadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes resSlideDownAlert {
+        from {
+          opacity: 0;
+          transform: translateY(-100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes resHeaderIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes resFadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes resBarGrow {
+        from {
+          transform: scaleX(0);
+        }
+        to {
+          transform: scaleX(1);
+        }
+      }
+      @keyframes resDonutPop {
+        from {
+          opacity: 0;
+          transform: rotate(-90deg) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: rotate(-90deg) scale(1);
+        }
+      }
+      @keyframes resRowIn {
+        from {
+          opacity: 0;
+          transform: translateX(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes resSpinOnce {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .res-alert-enter {
+          animation: resSlideDownAlert 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .res-header-enter {
+          animation: resHeaderIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.04s both;
+        }
+        .res-main-enter {
+          animation: resFadeIn 0.35s ease 0.06s both;
+        }
+        .res-kpi-stagger > * {
+          animation: resFadeUp 0.46s cubic-bezier(0.22, 1, 0.36, 1) both;
+          transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+        }
+        .res-kpi-stagger > *:nth-child(1) {
+          animation-delay: 0.05s;
+        }
+        .res-kpi-stagger > *:nth-child(2) {
+          animation-delay: 0.09s;
+        }
+        .res-kpi-stagger > *:nth-child(3) {
+          animation-delay: 0.13s;
+        }
+        .res-kpi-stagger > *:nth-child(4) {
+          animation-delay: 0.17s;
+        }
+        .res-kpi-stagger > *:nth-child(5) {
+          animation-delay: 0.21s;
+        }
+        .res-kpi-stagger > *:nth-child(6) {
+          animation-delay: 0.25s;
+        }
+        .res-kpi-stagger > *:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 28px rgba(24, 28, 33, 0.09);
+        }
+        .res-charts-stagger > * {
+          animation: resFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+          transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+        }
+        .res-charts-stagger > *:nth-child(1) {
+          animation-delay: 0.1s;
+        }
+        .res-charts-stagger > *:nth-child(2) {
+          animation-delay: 0.18s;
+        }
+        .res-charts-stagger > *:nth-child(3) {
+          animation-delay: 0.26s;
+        }
+        .res-charts-stagger > *:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 28px rgba(24, 28, 33, 0.09);
+        }
+        .res-panel-rise {
+          animation: resFadeUp 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+        .res-panel-rise-delay {
+          animation-delay: 0.26s;
+        }
+        .res-footer-enter {
+          animation: resFadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+        }
+        .res-bar-grow {
+          transform-origin: left center;
+          animation: resBarGrow 0.82s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .res-unit-bar-grid > div:nth-child(2) .res-bar-grow {
+          animation-delay: 0.16s;
+        }
+        .res-unit-bar-grid > div:nth-child(5) .res-bar-grow {
+          animation-delay: 0.22s;
+        }
+        .res-unit-bar-grid > div:nth-child(8) .res-bar-grow {
+          animation-delay: 0.28s;
+        }
+        .res-unit-bar-grid > div:nth-child(11) .res-bar-grow {
+          animation-delay: 0.34s;
+        }
+        .res-unit-bar-grid > div:nth-child(14) .res-bar-grow {
+          animation-delay: 0.4s;
+        }
+        .res-valor-stack > div:nth-child(1) .res-bar-grow {
+          animation-delay: 0.18s;
+        }
+        .res-valor-stack > div:nth-child(2) .res-bar-grow {
+          animation-delay: 0.26s;
+        }
+        .res-valor-stack > div:nth-child(3) .res-bar-grow {
+          animation-delay: 0.34s;
+        }
+        .res-donut-pop {
+          animation: resDonutPop 0.62s cubic-bezier(0.34, 1.56, 0.64, 1) 0.22s both;
+        }
+        #projects-tbody tr.res-table-row {
+          animation: resRowIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        }
+        #projects-tbody tr.res-table-row:nth-child(1) {
+          animation-delay: 0.02s;
+        }
+        #projects-tbody tr.res-table-row:nth-child(2) {
+          animation-delay: 0.06s;
+        }
+        #projects-tbody tr.res-table-row:nth-child(3) {
+          animation-delay: 0.1s;
+        }
+        #projects-tbody tr.res-table-row:nth-child(4) {
+          animation-delay: 0.14s;
+        }
+        #projects-tbody tr.res-table-row:nth-child(5) {
+          animation-delay: 0.18s;
+        }
+        .res-spin-once {
+          display: inline-block;
+          animation: resSpinOnce 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .toast-enter {
+          animation: none;
+        }
+      }
     </style>
   </head>
   <body class="text-on-background bg-background">
     <!-- Top Alert Bar -->
     <div
       id="alert-stale"
-      class="bg-error text-on-error px-margin py-2 flex items-center justify-center space-x-2 relative pr-14"
+      class="res-alert-enter bg-error text-on-error px-margin py-2 flex items-center justify-center space-x-2 relative pr-14"
     >
       <span class="material-symbols-outlined text-[20px] shrink-0"
         >warning</span
@@ -247,7 +446,7 @@
     </div>
     <!-- TopNavBar from JSON Anchor -->
     <header
-      class="bg-[#1A4E7A] font-['Inter'] antialiased tracking-tight docked full-width top-0 border-b border-white/15 flat no shadows flex justify-between items-center px-5 sm:px-8 h-16 w-full sticky z-50 text-white"
+      class="res-header-enter bg-[#1A4E7A] font-['Inter'] antialiased tracking-tight docked full-width top-0 border-b border-white/15 flat no shadows flex justify-between items-center px-5 sm:px-8 h-16 w-full sticky z-50 text-white"
     >
       <div class="flex items-center gap-6 sm:gap-12 h-full min-w-0">
         <span class="text-lg font-bold text-white truncate"
@@ -315,10 +514,10 @@
         </div>
       </div>
     </header>
-    <main class="p-margin max-w-[1600px] mx-auto">
+    <main class="res-main-enter p-margin max-w-[1600px] mx-auto">
       <!-- KPI Row -->
       <div
-        class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-gutter mb-lg"
+        class="res-kpi-stagger grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-gutter mb-lg"
       >
         <!-- Metric Card -->
         <div
@@ -431,7 +630,9 @@
         </div>
       </div>
       <!-- Main Charts Area -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-lg">
+      <div
+        class="res-charts-stagger grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-lg"
+      >
         <!-- Projects by Unit -->
         <div
           class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg flex flex-col"
@@ -441,7 +642,7 @@
           </h3>
           <div class="flex-grow flex flex-col min-h-0">
             <div
-              class="grid w-full items-center gap-x-4 gap-y-3 [grid-template-columns:minmax(9rem,max-content)_minmax(0,1fr)_2.5rem]"
+              class="res-unit-bar-grid grid w-full items-center gap-x-4 gap-y-3 [grid-template-columns:minmax(9rem,max-content)_minmax(0,1fr)_2.5rem]"
             >
               <span
                 class="text-body-md font-medium text-on-surface-variant shrink-0 pr-1 text-left leading-snug"
@@ -450,7 +651,10 @@
               <div
                 class="min-w-0 h-4 bg-surface-container-low rounded-full overflow-hidden self-stretch flex items-center"
               >
-                <div class="bg-primary h-full rounded-full" style="width: 85%"></div>
+                <div
+                  class="bg-primary h-full rounded-full res-bar-grow"
+                  style="width: 85%"
+                ></div>
               </div>
               <span
                 class="text-body-md font-bold text-on-surface tabular-nums text-right leading-none"
@@ -464,7 +668,10 @@
               <div
                 class="min-w-0 h-4 bg-surface-container-low rounded-full overflow-hidden self-stretch flex items-center"
               >
-                <div class="bg-primary h-full rounded-full" style="width: 60%"></div>
+                <div
+                  class="bg-primary h-full rounded-full res-bar-grow"
+                  style="width: 60%"
+                ></div>
               </div>
               <span
                 class="text-body-md font-bold text-on-surface tabular-nums text-right leading-none"
@@ -478,7 +685,10 @@
               <div
                 class="min-w-0 h-4 bg-surface-container-low rounded-full overflow-hidden self-stretch flex items-center"
               >
-                <div class="bg-primary h-full rounded-full" style="width: 45%"></div>
+                <div
+                  class="bg-primary h-full rounded-full res-bar-grow"
+                  style="width: 45%"
+                ></div>
               </div>
               <span
                 class="text-body-md font-bold text-on-surface tabular-nums text-right leading-none"
@@ -492,7 +702,10 @@
               <div
                 class="min-w-0 h-4 bg-surface-container-low rounded-full overflow-hidden self-stretch flex items-center"
               >
-                <div class="bg-primary h-full rounded-full" style="width: 30%"></div>
+                <div
+                  class="bg-primary h-full rounded-full res-bar-grow"
+                  style="width: 30%"
+                ></div>
               </div>
               <span
                 class="text-body-md font-bold text-on-surface tabular-nums text-right leading-none"
@@ -506,7 +719,10 @@
               <div
                 class="min-w-0 h-4 bg-surface-container-low rounded-full overflow-hidden self-stretch flex items-center"
               >
-                <div class="bg-primary h-full rounded-full" style="width: 20%"></div>
+                <div
+                  class="bg-primary h-full rounded-full res-bar-grow"
+                  style="width: 20%"
+                ></div>
               </div>
               <span
                 class="text-body-md font-bold text-on-surface tabular-nums text-right leading-none"
@@ -523,7 +739,7 @@
             Proyectos por Tipo
           </h3>
           <div class="flex items-center justify-center relative py-4">
-            <svg class="w-40 h-40 transform -rotate-90">
+            <svg class="res-donut-pop w-40 h-40 transform -rotate-90">
               <circle
                 class="text-surface-container"
                 cx="80"
@@ -615,7 +831,7 @@
           <h3 class="font-h3 text-h3 text-on-surface mb-lg">
             Valor: Capturado vs Esperado
           </h3>
-          <div class="space-y-6">
+          <div class="space-y-6 res-valor-stack">
             <div>
               <div class="flex justify-between text-body-md mb-2">
                 <span class="font-medium text-on-surface">Áridos</span>
@@ -624,7 +840,10 @@
               <div
                 class="h-2 w-full bg-surface-container-low rounded-full overflow-hidden"
               >
-                <div class="bg-primary h-full" style="width: 70%"></div>
+                <div
+                  class="bg-primary h-full rounded-full res-bar-grow"
+                  style="width: 70%"
+                ></div>
               </div>
             </div>
             <div>
@@ -635,7 +854,10 @@
               <div
                 class="h-2 w-full bg-surface-container-low rounded-full overflow-hidden"
               >
-                <div class="bg-primary h-full" style="width: 84%"></div>
+                <div
+                  class="bg-primary h-full rounded-full res-bar-grow"
+                  style="width: 84%"
+                ></div>
               </div>
             </div>
             <div>
@@ -646,7 +868,10 @@
               <div
                 class="h-2 w-full bg-surface-container-low rounded-full overflow-hidden"
               >
-                <div class="bg-primary h-full" style="width: 58%"></div>
+                <div
+                  class="bg-primary h-full rounded-full res-bar-grow"
+                  style="width: 58%"
+                ></div>
               </div>
             </div>
           </div>
@@ -654,7 +879,7 @@
       </div>
       <!-- Gantt Chart Container -->
       <div
-        class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg mb-lg"
+        class="res-panel-rise bg-surface-container-lowest border border-outline-variant p-lg rounded-lg mb-lg"
       >
         <h3 class="font-h3 text-h3 text-on-surface mb-1">
           Cronograma de Hitos 2026
@@ -701,7 +926,7 @@
       </div>
       <!-- Full-width Project Table -->
       <div
-        class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden"
+        class="res-panel-rise res-panel-rise-delay bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden"
       >
         <div
           class="px-lg py-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-low"
@@ -1344,7 +1569,7 @@
             .map(function (p) {
               var strike = p.inactivo ? " line-through opacity-70" : "";
               return (
-                '<tr class="row-proj hover:bg-surface-container-low transition-colors duration-150" tabindex="0" data-proyecto="' +
+                '<tr class="row-proj res-table-row hover:bg-surface-container-low transition-colors duration-150" tabindex="0" data-proyecto="' +
                 escapeHtml(p.proyecto) +
                 '">' +
                 '<td class="px-lg py-4 text-body-md font-medium text-on-surface-variant' +
@@ -1688,6 +1913,14 @@
 
         $("btn-refresh-metrics") &&
           $("btn-refresh-metrics").addEventListener("click", function () {
+            var ic =
+              this.querySelector &&
+              this.querySelector(".material-symbols-outlined");
+            if (ic && ic.classList) {
+              ic.classList.remove("res-spin-once");
+              void ic.offsetWidth;
+              ic.classList.add("res-spin-once");
+            }
             jitterKpis();
             showToast("Métricas actualizadas (datos de demostración).");
           });
@@ -1697,7 +1930,7 @@
     </script>
     <!-- Footer decoration (Optional corporate feel) -->
     <footer
-      class="mt-xl border-t border-outline-variant py-lg px-margin flex justify-between items-center text-label-md text-on-surface-variant opacity-60"
+      class="res-footer-enter mt-xl border-t border-outline-variant py-lg px-margin flex justify-between items-center text-label-md text-on-surface-variant opacity-60"
     >
       <div class="flex items-center gap-2">
         <span class="material-symbols-outlined text-[16px]"
