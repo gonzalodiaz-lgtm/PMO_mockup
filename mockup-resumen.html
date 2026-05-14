@@ -1324,15 +1324,11 @@
           if (!tb) return;
           tb.innerHTML = slice
             .map(function (p) {
-              var url = p.detalleUrl || null;
-              var dataUrl = url
-                ? ' data-url="' + url.replace(/"/g, "") + '"'
-                : "";
               var strike = p.inactivo ? " line-through opacity-70" : "";
               return (
-                '<tr class="row-proj hover:bg-surface-container-low transition-colors duration-150" tabindex="0"' +
-                dataUrl +
-                ">" +
+                '<tr class="row-proj hover:bg-surface-container-low transition-colors duration-150" tabindex="0" data-proyecto="' +
+                escapeHtml(p.proyecto) +
+                '">' +
                 '<td class="px-lg py-4 text-body-md font-medium text-on-surface-variant' +
                 strike +
                 '">' +
@@ -1364,12 +1360,11 @@
 
           tb.querySelectorAll("tr.row-proj").forEach(function (row) {
             var go = function () {
-              var u = row.getAttribute("data-url");
-              if (u) window.location.href = u;
-              else
-                showToast(
-                  "Demo: ficha de proyecto no disponible en este mockup.",
-                );
+              var nombre = row.getAttribute("data-proyecto");
+              if (nombre)
+                window.location.href =
+                  "mockup-proyectos.html?proyecto=" +
+                  encodeURIComponent(nombre);
             };
             row.addEventListener("click", go);
             row.addEventListener("keydown", function (e) {
