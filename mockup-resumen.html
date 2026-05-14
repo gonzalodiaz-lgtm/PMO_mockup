@@ -799,27 +799,27 @@
               <span
                 class="block w-2 h-2 rounded-full bg-primary mx-auto mb-1"
               ></span>
-              <p class="text-label-md font-bold">52%</p>
+              <p class="text-label-md font-bold">59%</p>
               <p class="text-[10px] text-on-surface-variant uppercase">
-                Analítica
+                Producto Digital In-house
               </p>
             </div>
             <div class="text-center">
               <span
                 class="block w-2 h-2 rounded-full bg-tertiary mx-auto mb-1"
               ></span>
-              <p class="text-label-md font-bold">30%</p>
+              <p class="text-label-md font-bold">14%</p>
               <p class="text-[10px] text-on-surface-variant uppercase">
-                IA Gen
+                Nuevos Negocios
               </p>
             </div>
             <div class="text-center">
               <span
                 class="block w-2 h-2 rounded-full bg-secondary mx-auto mb-1"
               ></span>
-              <p class="text-label-md font-bold">18%</p>
+              <p class="text-label-md font-bold">27%</p>
               <p class="text-[10px] text-on-surface-variant uppercase">
-                App y Plataforma
+                Otros tipos
               </p>
             </div>
           </div>
@@ -1101,16 +1101,22 @@
 
         function tipoBadge(tipo) {
           var cls = {
-            "Agentes de IA":
+            "Producto Digital In-house":
               "bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded-full text-label-md",
-            Lanzamiento:
+            "Producto Digital As a Service":
               "bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-full text-label-md",
-            "Mejora Continua":
+            "Programa I+D":
               "bg-secondary-fixed text-on-secondary-fixed px-2 py-0.5 rounded-full text-label-md",
-            "Agente de IA":
-              "bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded-full text-label-md",
+            "Postulación Fondo":
+              "bg-cyan-100 text-cyan-800 px-2 py-0.5 rounded-full text-label-md font-semibold",
+            "Nuevos Negocios":
+              "bg-violet-100 text-violet-800 px-2 py-0.5 rounded-full text-label-md font-semibold",
+            "Innovación Abierta":
+              "bg-orange-100 text-orange-800 px-2 py-0.5 rounded-full text-label-md font-semibold",
+            "Mesa de trabajo":
+              "bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full text-label-md font-semibold",
           };
-          var c = cls[tipo] || cls["Mejora Continua"];
+          var c = cls[tipo] || cls["Producto Digital In-house"];
           return '<span class="' + c + '">' + tipo + "</span>";
         }
 
@@ -1162,7 +1168,7 @@
             key: "PM-2",
             proyecto: "Asistente Whatsapp HPM",
             unidad: "Hormigón",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Mejora Continua",
             estado: "En curso",
             valor: "$180k / $320k",
@@ -1172,7 +1178,7 @@
             key: "PM-3",
             proyecto: "Deloitte Hub",
             unidad: "Hormigón",
-            tipo: "Lanzamiento",
+            tipo: "Producto Digital As a Service",
             etapa: "Diseño",
             estado: "Por Hacer",
             valor: "$60k / $400k",
@@ -1182,7 +1188,7 @@
             key: "PM-4",
             proyecto: "SOFOFA Hub",
             unidad: "Corporativo",
-            tipo: "Lanzamiento",
+            tipo: "Innovación Abierta",
             etapa: "Planificación",
             estado: "En curso",
             valor: "$90k / $250k",
@@ -1192,7 +1198,7 @@
             key: "PM-5",
             proyecto: "ANID y FONDEF",
             unidad: "Corporativo",
-            tipo: "Mejora Continua",
+            tipo: "Postulación Fondo",
             etapa: "Planificación",
             estado: "Por Hacer",
             valor: "$0k / $600k",
@@ -1202,7 +1208,7 @@
             key: "PM-6",
             proyecto: "Pago Express Áridos",
             unidad: "Áridos",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Piloto",
             estado: "En curso",
             valor: "$210k / $280k",
@@ -1212,7 +1218,7 @@
             key: "PM-7",
             proyecto: "Portal Clientes Coactiva",
             unidad: "Coactiva",
-            tipo: "Lanzamiento",
+            tipo: "Producto Digital In-house",
             etapa: "Diseño",
             estado: "Por Hacer",
             valor: "$120k / $450k",
@@ -1222,7 +1228,7 @@
             key: "PM-8",
             proyecto: "Alo Polpaico",
             unidad: "Corporativo",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Mejora Continua",
             estado: "En curso",
             valor: "$340k / $500k",
@@ -1232,7 +1238,7 @@
             key: "PM-9",
             proyecto: "Nuevos Negocios: UHPC",
             unidad: "Cemento",
-            tipo: "Lanzamiento",
+            tipo: "Nuevos Negocios",
             etapa: "Planificación",
             estado: "Por Hacer",
             valor: "$25k / $900k",
@@ -1242,7 +1248,7 @@
             key: "PM-10",
             proyecto: "Polpaico Construcción e Industria",
             unidad: "Corporativo",
-            tipo: "Lanzamiento",
+            tipo: "Nuevos Negocios",
             etapa: "Planificación",
             estado: "En curso",
             valor: "$150k / $1.1M",
@@ -1252,7 +1258,7 @@
             key: "PM-11",
             proyecto: "Funnel IA",
             unidad: "Áridos",
-            tipo: "Agentes de IA",
+            tipo: "Producto Digital In-house",
             etapa: "Entrega",
             estado: "Listo",
             valor: "$420k / $600k",
@@ -1262,7 +1268,7 @@
             key: "PM-12",
             proyecto: "App Maestro Cemento",
             unidad: "Cemento",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Entrega",
             estado: "Inactivo",
             valor: "$0k / $200k",
@@ -1273,7 +1279,7 @@
             key: "PM-13",
             proyecto: "Venta Contado Express HPM",
             unidad: "Hormigón",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Entrega",
             estado: "Inactivo",
             valor: "$0k / $150k",
@@ -1284,7 +1290,7 @@
             key: "PM-14",
             proyecto: "Nuevos Negocios: INNSPIRAL",
             unidad: "Corporativo",
-            tipo: "Lanzamiento",
+            tipo: "Nuevos Negocios",
             etapa: "Entrega",
             estado: "Inactivo",
             valor: "$0k / $800k",
@@ -1295,7 +1301,7 @@
             key: "PM-15",
             proyecto: "Piloto Sales IA",
             unidad: "Áridos",
-            tipo: "Agentes de IA",
+            tipo: "Programa I+D",
             etapa: "Entrega",
             estado: "Inactivo",
             valor: "$80k / $300k",
@@ -1306,7 +1312,7 @@
             key: "PM-16",
             proyecto: "Portal Clientes Hormigones",
             unidad: "Hormigón",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Roll Out",
             estado: "En curso",
             valor: "$290k / $520k",
@@ -1316,7 +1322,7 @@
             key: "PM-17",
             proyecto: "Portal Clientes Áridos",
             unidad: "Áridos",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Roll Out",
             estado: "En curso",
             valor: "$175k / $400k",
@@ -1326,7 +1332,7 @@
             key: "PM-18",
             proyecto: "Mesa de IA",
             unidad: "Corporativo",
-            tipo: "Agentes de IA",
+            tipo: "Mesa de trabajo",
             etapa: "Roll Out",
             estado: "En curso",
             valor: "$500k / $900k",
@@ -1336,7 +1342,7 @@
             key: "PM-19",
             proyecto: "Mesa Madurez Digital",
             unidad: "Corporativo",
-            tipo: "Mejora Continua",
+            tipo: "Mesa de trabajo",
             etapa: "Piloto",
             estado: "En curso",
             valor: "$220k / $480k",
@@ -1346,7 +1352,7 @@
             key: "PM-20",
             proyecto: "Asistente WhatsApp IA Cemento",
             unidad: "Cemento",
-            tipo: "Agente de IA",
+            tipo: "Producto Digital In-house",
             etapa: "Roll Out",
             estado: "En curso",
             valor: "$95k / $360k",
@@ -1356,7 +1362,7 @@
             key: "PM-21",
             proyecto: "App Transportista HPM",
             unidad: "Hormigón",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Roll Out",
             estado: "En pausa",
             valor: "$50k / $300k",
@@ -1366,7 +1372,7 @@
             key: "PM-22",
             proyecto: "App Transportista Áridos",
             unidad: "Áridos",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Mejora Continua",
             estado: "En curso",
             valor: "$140k / $310k",
@@ -1376,7 +1382,7 @@
             key: "PM-23",
             proyecto: "Portal Clientes Polpaico Cemento",
             unidad: "Cemento",
-            tipo: "Mejora Continua",
+            tipo: "Producto Digital In-house",
             etapa: "Entrega",
             estado: "En curso",
             valor: "$850k / $850k",
