@@ -1,0 +1,135 @@
+﻿Titulo_Proyecto;Sponsor;Lider_Proyecto;Business_Owner;Fecha_Actualizacion;Tipo_Proyecto;Area_Proyecto;Etapas;Descripcion_Proyecto;KPI_Estrategico;Base_Estrategico;Real_Estrategico;Meta_Estrategico;KPI_Tactico;Base_Tactico;Real_Tactico;Meta_Tactico;Ultimos_Avances;Proximos_Pasos;Riesgos_Mitigaciones;Etapa1;Actividad1;Fecha1;Avance1;Etapa2;Actividad2;Fecha2;Avance2;Etapa3;Actividad3;Fecha3;Avance3;Etapa4;Actividad4;Fecha4;Avance4;Etapa5;Actividad5;Fecha5;Avance5;Etapa6;Actividad6;Fecha6;Avance6;Inicio;Termino;Fecha Límite;Unidad de Negocio
+App Transportista Áridos;Andrés Valdivieso;Kevin Valenzuela;Julio San Martín;30-04-2026;Producto Digital In-house;DX;Mejora Continua;"Una aplicación corporativa de transportistas, que permite:
+Entregar al operador información sobre sus despachos.
+Entregar al cliente información en tiempo real desde su operador.
+Digitalizar la guía.
+Entregar la guía de manera automática al cliente.
+Sistematizar data relevante entregada por el cliente.
+Entregar un mayor control al equipo de logística. 
+Marcar los estados del pedido para seguimiento interno y externo del despacho.";NPS;;;;Adherencia uso;0;1;0,76;Control de combustible áridos en desarrollo;Probar en QAS modulo control de combustible áridos;Resistencia al cambio de los transportistas.;Entrega;Definir Modelo de soporte y Matriz de incidentes;Junio 2025;1;Entrega;Entrega proyecto;Julio 2025;1;Mejora Continua;Desarrollo de mejoras “Sprint 3”;Julio 2025;1;Mejora Continua;Pase a productivo dashboard.;Enero 2026;1;;;;;;;;;05-03-2026;20-03-2026;20-03-2026;Aridos
+Pago Express Áridos;Andres Valdivieso;Pablo Zemelman;Luis Uribe;20-03-2026;Producto Digital As A Service;DX;Diseño;"El area de áridos levantó la problemática de que los pedidos de clientes que se hacían vía transferencia tardaban demasiado en liberarse. Esto genera no solo una insatisfacción en los clientes sino una ineficiencia en el ingreso de nuestras plantas. 
+Este proyecto consiste e integrar las transferencias del cliente a través de la plataforma Khipu, con SAP, de manera de automatizar las liberaciones de los pedidos contado.";Ventas contado vs total;;;;Satisfaccion cliente en la plataforma;;;;Nos reuninimos con Khipu, cerramos con ellos.;Partir la integración con Lion Consulting. Kick off con proveedor y negocio. / Diseño de carta gantt. / Se definio a Lion Consulting con Khipu para la integración.;Negociación con Khipu.;Piloto;Kick Off - Presentar las bases del proyecto a todos los stakeholders;TBD;0;Piloto;Coordinacion con el negocio fase de desarrollo;TBD;0;;;;;;;;;;;;;;;;;;;;Aridos
+Portal Clientes Áridos;Andrés Valdivieso;Pablo Zemelman;;20-03-2026;Producto Digital In-house;DX;Roll Out;"Este proyecto tiene como finalidad ofrecer una herramienta B2B a nuestros clientes a nivel corporativo, partiendo por el area de cemento.
+A traves de este portal, los clientes seran capaces de tener toda su informacion en el mismo lugar, y de generar transacciones, eficientando asi tambien nuestra operacion. 
+En las proximas fases, se considera incorporar a aridos y hormigon, actualizando la experiencia de este ultimo.";;;;;;;;;Se agendo showcase final con el negocio. Se mostro la plataforma y se solicitaron algunos ajustes de cara a la marcha blanca. El horario debe estar sujeto a am y pm y pop de programacion despues de las 16 hrs para el dia siguiente;Ajustar mejoras de El horario debe estar sujeto a am y pm y pop de programacion despues de las 16 hrs para el dia siguiente y visitar clientes para marcha blanca;Incidencias detectadas durante la marcha blanca;Roll Out;Ajustar mejoras solicitadas por el negocio;27 abr. 2026 - 03 may. 2026;0,5;;;;;;;;;;;;;;;;;;;;;16-02-2026;20-02-2026;20-02-2026;Aridos
+Asistente WhatsApp IA Cemento;Felipe Ureta;Kevin Valenzuela;Sebastian Sotomayor;30-04-2026;Producto Digital As A Service;DX;Mejora Continua;"Existe un alto volumen de consultas al área de servicio de nuestros clientes.
+Actualmente no tienen un espacio donde puedan acceder a su información, su ejectuivo es con quien triangulan todo. 
+Los clientes más pequeños como ferreterías independientes y encadenadas no quieren utilizar el computador, su herramienta principal es el WhatsApp.
+WhatsApp para clientes integrado con nuestros sistemas donde el cliente puede acceer de manera automática a información.";NPS;0;0,65;0,8;"Reducción de HH de CSC.
+Reducción HH logística cemento.
+Reducción HH vendedores.";;;;Se desorrolllo la funcionalidad de solicitudes de pedidos y repetir pedidos. Correcciones tecnicas en solicitudes de pedidos y guías;Pase a productivo funcionalidad solicitud de pedido.;No entregar información en tiempo real.;Piloto;Desarrollo, integracion;Marzo 2025;1;Piloto;Testeo con clientes;Junio 2025;1;Roll Out;Liberación de la solución a clientes;Julio 2025;1;Roll Out;Comunicación a clientes;Diciembre 2025;1;Entrega;Reunión de entrega de solución al negocio;Enero 2026;1;Mejora Continua;Diseño de funcionalidad solicitud de pedido;Febrero 2026;1;16-02-2026;02-03-2026;02-03-2026;Cemento
+App Maestro Cemento;Paula Ferrada;Kevin Valenzuela;Sebastian Sotomayor;30-04-2026;Producto Digital In-house;DX;Piloto;"Aplicación dirigida a maestros de la construcción
+El usuario puede acceder a capacitaciones, cubicador, información de interés y le permitirá profesionalizar su día a día mediante un generador de cotizaciones y proyectos. Además, contaremos con un perfil administrador donde podremos ir modificando la comunicación de la herramienta de manera autónoma.";NPS;;;;"Tasa de uso.
+Funcionalidades más usadas.
+N de usuarios.
+N de descargas";;;;Ajustes tecnicos en base de datos y corrección;Subida de la app. a las tiendas play store y app store;"Bugs y fallas.
+No subir el nivel de adherencia.  
+Cambios en definiciones técnicas.";Diseño;Desarrollo de software en metodología scrum;Ener.- Mar. 2025;0,9;Piloto;Comunicación de la solución;Jun. - Dic. 2025;0;Roll Out;Subida de la app. a las tiendas play store y app store;Jun. - Dic. 2025;0;;;;;;;;;;;;;18-02-2026;27-02-2026;27-02-2026;Cemento
+Portal Clientes Polpaico Cemento;Felipe Ureta;Pablo Zemelman;Sebastian Sotomayor;20-03-2026;Producto Digital In-house;DX;Mejora Continua;"Este proyecto tiene como finalidad ofrecer una herramienta B2B a nuestros clientes a nivel corporativo, partiendo por el area de cemento.
+A traves de este portal, los clientes seran capaces de tener toda su informacion en el mismo lugar, y de generar transacciones, eficientando asi tambien nuestra operacion. 
+En las proximas fases, se considera incorporar a aridos y hormigon, actualizando la experiencia de este ultimo.";"NPS 
+Pedidos online vs total";;;;Interacción plataforma (guias, pedidos, certificados, visita;0;;200 clientes únicos;Se mejoro dejar los pedidos de saco con multiplos de 72 (pallet cerrado) se ajusto la parametria en mis documentos para poder mostrar el detalle del producto y mejorar la velocidad;Incorporar el modulo de politicas de despacho. Pasar a productivo los cambios realizados a QA;Lentitud en plataforma;Mejora Continua;Pasar a Productivo;27 abr. 2026 - 03 abr. 2026;0;;;;;;;;;;;;;;;;;;;;;11-02-2026;11-02-2026;11-02-2026;Cemento
+Fondos Públicos:  ANID y FONDEF;Paula Ferrada;Mauricio Cares;Christopher Andrews;04-05-2026;Postulación Fondo;Innovación;Diseño;"Fondos adjudicados estatales para el I+D y vinculación con universidades.
+ANID: Fondo para el desarrollo de tecnologías para captar CO2 e inyección en soluciones cementicias.
+FONDEF:  Fondo para uso de áridos reciclados en estructuras constructivas y viales. 
+Responsabilidad de innovación de coordinar múltiples áreas técnicas internas con investigadores externos de la UFRO  y UC.";EBITDA de nuevos negocios;0;0;Por definir;No aplica;N/A;N/A;N/A;Kick off de ambos proyectos;Construcción de muros de pruebas proyecto áridos.;"R: Cumplimiento estricto de la carta Gantt.
+M: Hacer seguimiento y PMO desde el área de innovación";Diseño;Adjudicación fondo público; 1 dic. 2025 - 30 dic. 2025;1;Piloto;Kickoff de ambos proyectos;2 ene. 2026 - 1 feb. 2026;1;Piloto;Construcción de muros de pruebas proyecto áridos;1 feb. 2026 - 23 abr. 2026;0,5;Piloto;Inicio de operaciones de prototipo de captación de CO2;1 sep. 2026 - 30 nov. 2026;0;;;;;;;;;11-02-2026;07-05-2026;07-05-2026;Cemento, Hormigon
+Portal Clientes Coactiva;;Pablo Zemelman;;20-03-2026;Producto Digital In-house;DX;Diseño;El proyecto COACTIVA PORTAL DE APLICACIONES tiene como objetivo la implementación de una solución tecnológica integral orientada a la digitalización de procesos críticos asociados a la gestión de residuos industriales, con foco en trazabilidad, cumplimiento normativo y eficiencia operativa.;;;;;;;;;Se agendo workshop con el negocio para ajustar front de back office. se opto por partir creando el portal del back office. Se continuo agendado visitas con clientes;Presentar avances al negocio. Validar portal back office y comenzar a desarrollar;;Diseño;Creacion portal Back Office;25 may. 2026 - 31 may. 2025;0;Diseño;Desarrollo portal clientes;8 jun. 2026 - 14 jun. 2026;0;;;;;;;;;;;;;;;;;;;;Coactiva
+Innovación Abierta: SOFOFA Hub;Andres Valdivieso;Cristobal Meza;TBD;04-05-2026;Innovación Abierta;Innovación;Diseño;"Objetivo: Acelerar la adopción tecnológica en Polpaico Soluciones mediante validación rápida de soluciones del ecosistema global, resolviendo desafíos clave de eficiencia, sostenibilidad y procesos.
+
+Alcance: 
+- Participación en alianza Venture Client SOFOFA Hub.
+- Definición y priorización de 2–3 desafíos en Áridos y Cemento.
+- Scouting y evaluación de startups tecnológicas.
+- Ejecución de POC (≈3 meses) y decisión de escalamiento.";TBD;;;;"# de pilotos ejecutados
+# de soluciones escaladas";TBD;TBD;>= 1 escalamiento por desafío;"Participaremos de ""oyentes"" en la oleada de Marzo para entender el proceso, conocer a las otras empresas y entender el perfil del negocio que tiene que participar";=- Reunión con los Gerentes de Áridos para Kickoff;"R: Existe poca flexibilidad respecto de los timings de proyecto, dado que nosotros nos adecuamos al programa, no al revés.
+
+M: Ejecución de planificación de proyecto de manera temprana, definiendo Business Owners y Gantt que considere este riesgo.";Plan;Gobierno y Setup del Proyecto;1 abr. 2026 - 30 abr. 2026;0;Diseño;Levantamiento y Priorización de Desafíos;1 may. 2026 - 31 may. 2026;0;Roll Out;Preparación y Lanzamiento de la Convocatoria;20 may. 2025 - 7 jun. 2026;0;Roll Out;Scouting y Selección de Startups;8 jun. 2026 – 15 jul.2026;0;Roll Out;Diseño y Ejecución de Pilotos;1 ago. 2026 - 30 sep. 2026;0;Entrega;Evaluación y Decisión Post‑Piloto;1 oct. 2026 - 31 oct. 2026;0;01-08-2026;01-03-2027;01-03-2027;Áridos
+Mesa de IA (Centro de Excelencia);Andrés Perez;Francisco Echeverria;No aplica;21-04-2026;Mesa de Trabajo;Transformación;Roll Out;"Impulsar la madurez en la adopción de Inteligencia Artificial, avanzando progresivamente del Tier 1 al Tier 3. 
+Impulsar un cambio cultural entorno a la adopción de la IA en toda la organización.
+Alinear el uso de tecnologías de IA con los objetivos del negocio.
+Innovar con IA para generar valor para el negocio.";Madurez Digital;3,51;3,51;4,19 - 5,10;"Productividad
+HH Automatizadas
+Jornadas Equivalentes (JEQ)";;;;"Onboarding célula digital IA nueva (Blueprint)
+Diseño rol de embajadores digitales 
+Despliegue comunicaciones de Ola 1";"Showcase finales Quick Wins IA
+Priorización de Ola 2 de Casos de Uso IA";"R: Retraso de entrega arquitectura IA por parte de tecnología  
+M: Seguimiento a equipo de infraestructura";Roll Out;Seleccionar casos de uso prioritarios (quick wins);1 dic. 2025 - 2 feb. 2026;1;Roll Out;Desplegar casos de uso en ambientes productivos TI para liberar los agentes a los equipos;2 feb.2026 - 31 mar. 2026;0,75;Roll Out;Habilitar arquitectura IA para funnel IA;5 ene. 2026 a 10 mar. 2026;1;Piloto;Elaboración plan gestión del cambio (actividades, webinars, concursos, comunidades, etc.) y definición del rol embajadores;1 abr. 2026 a 30 abr. 2026;0,25;Diseño;Planificación Ola 2 y Ola 3 de casos de uso IA;1 abr. 2026 a 30 abr. 2026;0,75;Diseño;Diseño y desarrollo Comunidad IA;1 abr. 2026 a 30 jun. 2026;0;01-02-2026;30-05-2026;30-05-2026;Corporativo
+Mesa Madurez Digital;Andrés Perez;Francisco Echeverria;No aplica;21-04-2026;Mesa de Trabajo;Transformación;Roll Out;"Diagnosticar la madurez digital de Polpaico a través de una consultoría estrategica y medir el  Índice de Madurez Digital. Conformación de la mesa de trabajo ""Oficina de Transformación"" compuesta por distintos equipos y pilares: Data & IA, Tecnología, Procesos, Cultura Digital, Talento Digital, Innovación Abierta & Experiencia Digital.";Madurez Digital;3,51;3,51;4,19 - 5,10;No aplica;N/A;N/A;N/A;Agendamiento de Comité de Innovación & Transformación para el 12 Mayo 2026, cerrando agenda con foco en IA y próximos pasos;Construcción de presentación ppt para el Comité de Innovación & Transformación;No aplica;Entrega;Creación de Oficina de Transformación;1 ago. 2025;1;Entrega;Taller de Visionamiento;1 dic. 2025 - 26 dic. 2025;1;Entrega;Taller de Activación;1 dic. 2025 a 26 dic. 2025;1;Entrega;Gestión administrativa de pagos a proveedor;2 ene. 2026 a 28 feb. 2026;1;Roll Out;Dar visibilidad de avances del CoE IA, DX, Innovación y Gob. De Datos en el próximo Comité de Innovación & Transformación;23 abr. 2026 a 31 abr. 2026;1;Roll Out;Dar visibilidad de avances del CoE IA en el próximo Comité de Innovación & Transformación de Mayo;21 abr. 2026 a 12 may. 2026;0,75;20-04-2026;12-05-2026;12-05-2026;Corporativo
+Funnel IA;Francisco Echeverria;Kevin Valenzuela;;30-04-2026;Producto Digital In-house;DX;Diseño;"Diversos agentes IA para áreas corporativas con distintos casos de uso 
+Ejecución de piloto(s) en proyectos reales";Madurez Digital;3,51;3,51;4,19 - 5,10;Reducción HH;0;100;100;Se realizaron ajustes al asistente de Legal, se agregaron las categorias de solicitudes;Pruebas en QAS Agente de PPEE;Problemas técnicos del agente;Plan;Definir casos de uso de agentes IA;Oct. - Nov.  2025;1;Diseño;Definir la arquitectura técnica del agente;Ene. - Mar. 2026;1;Roll Out;Pasar a ambientes polpaico los agentes desarrollados;Mar. - May. 2026;0,25;;;;;;;;;;;;;22-02-2026;18-03-2026;18-03-2026;Corporativo
+Piloto Sales IA;Eduardo Garcia;Mauricio Cares;Pablo Rojas;04-05-2026;Producto Digital As A Service;DX;Piloto;Identificar barreras y costos asociados para orientar futuras decisiones estratégicas.;"NPS
+EBITDA";"85%
+0";"85%
+0";">90%
+6.000.000";"# de startups evaluadas
+Pilotos escalados";"0
+0";"5
+0";"5
+1";Solucionar problemas de mejora continua antes del relanzamiento;Salir a productivo en cota horaria;"R: Infactabilidad de escalabilidad por tamaño de startup.​
+M:Pasar a contrato de servicio con KAM.";Piloto;Desarrollo y pilotaje de agente para consulta de estado de camión ​;1 dic. 2025 - 15 ene. 2026;1;Roll Out;Pasar a contrato de servicio con SalesIA e inicio de mejora continua;15 feb. 2026 al 15 mar.2026;1;Roll Out;Salir a productivo en cota horaria;4 abr. 2026 - 11 may. 2026;0;Roll Out;Pasar a cota completa;11 may. 2026 - 1 jun.2026;0;Entrega;Traspasar la continuidad  operacional y la gobernanza de la herramienta al equipo de logistica;1 jun. 2026 - 1 jul. 2026;0;;;;;08-04-2026;04-05-2026;04-05-2026;Corporativo
+App Transportista HPM;Eduardo Garcia;Kevin Valenzuela;Andrés Soto;30-04-2026;Producto Digital In-house;DX;Mejora Continua;"Una aplicación corporativa de transportistas, que permite:
+Entregar al operador información sobre sus despachos.
+Entregar al cliente información en tiempo real desde su operador.
+Digitalizar la guía y su firma.
+Entregar la guía de manera automática al cliente.
+Sistematizar data relevante entregada por el cliente.
+Entregar un mayor control al equipo de logística.";NPS;;;;Adherencia uso;0;0,65;0,8;Pase a QAS de firmar sin conexión y correcciones de seguridad;Pasar a productivo mejoras técnicas;Adopción de la herramienta por los operadores.;Roll Out;Concurso para aumentar adherencia;May.- Jul. 2025;1;Entrega;Definir Modelo de soporte y Matriz de incidentes;Junio 2025;1;Entrega;Entrega proyecto;Julio 2025;1;Mejora Continua;Desarrollo de mejoras “Sprint 3”;Julio 2025;1;Mejora Continua;Pase a productivo segunda versión de la aplicación;Enero 2026;1;;;;;02-03-2026;20-03-2026;20-03-2026;Hormigon
+Venta Contado Express HPM;Eduardo Garcia;Kevin Valenzuela;Andrés Soto;30-04-2026;Producto Digital In-house;DX;Piloto;"Portal de venta contado.
+Los clientes pueden acceder, ver sus órdenes de compra, generar sus pedidos y pagar a través de la plataforma. 
+Se generan automáticamente el asiento contable y el pedido, de manera que el proceso de programación y crédito ya no sea necesario.";Volumen de Ventas;;;;"Reducción de HH de CSC.
+Reducción HH logística cemento.
+Reducción HH vendedores.";;;;Marcha blanca de la app para ventas a nuevos clientes;Desarrollar liberación de pedidos automatica para clientes antiguos;Problemas técnicos con las integraciones con los sistemas;Piloto;Desarrollo, integracion;Marzo 2025;1;Piloto;Corecciones tecnicas en QAS;Nov. 2025 - Ener. 2026;1;Roll Out;Paso a productivo;Ener. - Mar. 2026;1;Roll Out;Paso a productivo;Ener. - Mar. 2026;0;Roll Out;Liberación de la app a vendedores;Abril 2026;0;;;;;13-03-2026;05-12-2026;05-12-2026;Hormigon
+Portal Clientes Hormigones;Eduardo Garcia;Pablo Zemelman;Daniel Espinaza;20-03-2026;Producto Digital In-house;DX;Roll Out;Mejorar experiencia usuario de portal actual y unificarlo al proyecto Portal corporativo;"NPS 
+Pedidos online vs total";;;;Interacción plataforma (guias, pedidos, certificados, visita);;;;Se mostro propuesta para Volver a programar a traves del portal.;Se agendo reunion con el negocio para mostrar propuesta de utilizar el portal para comenzar a programar;baja tasa de uso de la programacion en linea y entender actualizacion;Mejora Continua;Entender flujo End-to-End;1 mar. 2026 - 15 mar. 2026;1;Mejora Continua;Presentar propuesta a Paula;23 mar. 2026 - 29 mar. 2026;1;Mejora Continua;Presentar al negocio propuesta de programacion online;;;;;;;;;;;;;;;16-02-2026;20-02-2026;20-02-2026;Hormigon
+Asistente Whatsapp HPM;Eduardo Garcia;Kevin Valenzuela;Andrés Soto;30-04-2026;Producto Digital In-house;DX;Plan;Producto dedicado a la venta a cliente final de hormigón, de manera sencilla y acompañada.;NPS;0;;;Número de solicitantes;0;;;Entrevistar a clientes;Informe con resultados de entrevistas;;Piloto;Creación de ambiente QAS;Mayo 2025;1;Piloto;Ajustes técnicos en QAS;May. - Jun. 2025;0,5;Roll Out;Pase a productivo;Jun. - Jul. 2025;0;Entrega;Entrega a key user negocio;TBD;0;;;;;;;;;16-03-2026;16-04-2026;16-04-2026;Hormigon
+Alo Polpaico;Eduardo Garcia;Mauricio Cares;Pablo Rojas;04-05-2026;Producto Digital As A Service;DX;Diseño;"Negocio presenta problemas e ineficiencias en la gestión de sus procesos de carácter conversacional con el cliente.
+Se solicita a equipo de innovación ayuda en el desarrollar iniciativas para optimizar sus procesos, donde se decide comenzar una implementación de tecnología IA Conversacional.
+Se inicia piloto de agente IA con audio natural con la startup sales IA.
+Decisión estratégica de licitación para nuevo contact center por limitaciones de proveedor actual.";"NPS
+EBITDA";"85%
+0";"85%
+0";">90%
+Por definir";"Número de proveedores de Contact Center evaluados
+Número de proveedores de Contact Center adjudicados";"16
+1";"16
+1";"16
+1";Tener reuniones técnicas con los cinco candidatos de central telefonica;Lanzar RFP;"R: No conocer el estado del arte real de las soluciones de contact center.
+M: Abastecimiento propone el uso de un documento RFI para levantar informaciones de soluciones de contact center.";Diseño;Desarrollo de RFI para prospectar nuevos contact center;1 dic. 2025 - 1 feb.2026;1;Piloto;Lanzamiento de RFI a proveedores elegidos;1 feb. 2026 - 17 abr. 2026;1;Piloto;Tener reuniones con prospectos de RFP;13 abr. 2026 -17 abril 2026;1;Piloto;Redaccón y relanzamiento de RFP;17 abr. 2025 - 8 may. 2026;0;Piloto;Adjudicación y Kickoff;08 may. 2026 -  29 may. 2026;0;Piloto;Diseño y desarrollo de nueva central telefonica;1 jul. 2026 -1 sept. 2026;0;14-04-2026;30-04-2026;30-04-2026;Hormigon
+Innovación Abierta en Hormigones – Deloitte Hub Apta;Hector Rodriguez;Mauricio Cares;Héctor Rodríguez;04-05-2026;Innovación Abierta;Innovación;Diseño;"Utilización de la herramienta de innovación abierta para la resolución de 3 desafíos de innovación de hormigones relacionados a; Producto no conforme, Hormigón de Retorno, Sobreprogramación.
+Se puede hacer un hunting (búsqueda dirigida y privada) y/o una convocatoria abierta.
+Al recibir propuestas, solo se decide quedarse con las propuestas del desafío 1.";EBITDA hormigones;0;0;150000000;"# desafios enviados a resolución
+# soluciones recibidas por desafio
+# soluciones avanzan a POC
+# soluciones avanzan a piloto";N/A;"1 de 3
+>10
+>5
+>2";"0
+0
+0
+0";Workshop para validar ingenieria conceptual con equipo de mantenimiento en Planta La Divisa;Solicitar a equipo consultor informe de ingenienieria basica y mockup de herramientas a entregar a equipo de diseño;"R: Propuestas muy centradas en el aspecto técnico.
+M: Proceso de revisión de propuestas para darle enfoque comercial.";Diseño;Demo day y definición de ganadores;1 dic. 2025 - 1 ene. 2026;1;Diseño;Iteración propuesta  de trabajo;1 ene. 2026 - 1 feb. 2026;1;Diseño;Evaluación financiera y presentación a comex;1 feb. 2025 - 1 mar. 2026;0,8;Entrega;Inicio e implementación de traspaso al negocio;1 mar- 2026 - 23 abr. 2026;0;Entrega;Postergar proyecto hasta Q4;1 oct. 2026 - 1 dic. 2026;0;;;;;01-10-2026;01-12-2026;01-12-2026;Hormigon
+Nuevos Negocios: INNSPIRAL;Eduardo García;Cristobal Meza;Leonardo Sabariego;04-05-2026;Nuevos Negocios;Innovación;Piloto;"Objetivo: Diseñar un portafolio de nuevos negocios y un modelo operativo para ingresar al mercado minero, contribuyendo a la meta de $20.000 MM de EBITDA en Proyectos Especiales al 2028.
+
+Alcance:
+- Análisis del mercado minero y oportunidades 2025–2034, Identificación de dolores de mandantes, EPC y constructoras, Diseño y testeo de 3–5 nuevos negocios, Definición de modelo operativo, alianzas y capacidades, Caso de negocio, go‑to‑market e inversiones 2026.";"- % EBITDA Nuevos Negocios
+- EBITDA Proyectos Especiales";;;;3 a 5 Nuevos Negocios priorizados, Valor del portafolio XX, Casos de negocio aprobados, Estrategias de GTM aprobadas;;;;Comité #2 ejecutado, inicio de profundización de casos de negocio;"Desarrollo de casos de negocio y plan Go-to-Market
+Inicio etapa 2 de proyecto: Generación de Modelos de Negocio";;Plan;Identificación de Desafíos;5 ene. 2026 – 31 ene. 2026;1;Diseño;Diseño del Portafolio;2 mar. 2026 – 20 mar. 2026;1;Piloto;Testeo de Negocios;23 mar. 2026 – 17 abr. 2026;0;Roll Out;Modelo Operativo y Alianzas;20 abr. 2026 – 2 may. 2026;0;Entrega;Caso de Negocio;5 may. 2026 – 16 may. 2026;0;;;;;01-01-2026;01-04-2026;01-04-2026;Hormigón
+Nuevos Negocios: UHPC;Eduardo García;Cristobal Meza;Leonardo Sabariego;04-05-2026;Nuevos Negocios;Innovación;Diseño;"Objetivo: Desarrollar y validar soluciones UHPC para aplicaciones mineras, posicionando a Polpaico Soluciones como referente en hormigones avanzados en Chile.
+
+Alcance: 
+- Desarrollo y validación tecnológica de mezclas UHPC.
+- Ensayos de desempeño (durabilidad, resistencia, bombeabilidad).
+- Definición de formatos de oferta (in situ y prefabricados).
+- Pilotos con clientes mineros y evaluación comercial.";% EBITDA Nuevos Negocios;;;;"- Avance del blueprint de producción y abastecimiento
+- Validación de Clientes & Nivel de preparación para pilotos";;;Aplicaciones con feedback positivo;Evaluación Business Case;Gestionando avances de formulación de UHPC local con RDC y en espera de recepción de materias primas internacionales para primeros ensayos.;;Plan;Definición de Foco UHPC y Caso Relaves;17 dic 2025 – 22 mar 2026;1;Diseño;Desarrollo y Optimización UHPC (CHAKAY‑I);17 dic 2025 – 6 may 2026;0,2;Piloto;Caracterización y Ensayos Orientados a Relaves;9 mar. 2026 – 28 jul. 2026;0;Roll Out;Prototipo y Validación Aplicada (Relaves);15 may. 2026 – 30 jun. 2026;0;Entrega;Adaptación Final y Base para Escalamiento;28 jul. 2026 – 30 nov. 2026;0;Entrega;Decisión Chakay-II;1 dic. 2026 - 7 dic. 2026;0;01-11-2025;01-11-2026;01-11-2026;Hormigón
+Integración Estratégica Polpaico – Rerco;Eduardo García;Cristobal Meza;Leonardo Sabariego;04-05-2026;Nuevos Negocios;Innovación;Diseño;"Objetivo: Evaluar y validar un modelo de integración estratégica con Rerco para proyectos de infraestructura energética, habilitando una decisión informada de inversión.
+
+Alcance: 
+- Diseño y ejecución de piloto(s) en proyectos reales.
+- Medición de sinergias técnicas, operativas y económicas.
+- Definición del modelo de integración futura.
+- Soporte a la decisión de inversión y evaluación de riesgos.";% EBITDA Nuevos Negocios;;;;"- Variación de margen del piloto (%)
+- Disponibilidad de información para decisión de inversión (Sí / No)";;;;Firma de NDA - Polpaico - Rerco;Diseño de piloto conjunto para probar modelo de riesgo y utilidad compartida;;Plan;Definición del Modelo de Integración;16 enero 2026 – 14 febrero 2026;0,5;Diseño;Diseño del Piloto y Acuerdos Formales;10 feb. 2026 – 13 mar. 2026;0;Piloto;Ejecución del Proyecto Conjunto;15 mar. 2026 – 30 jun. 2026;0;Roll Out;Medición de Sinergias y Ajustes;1 jun. 2026 – 31 jul. 2026;0;Entrega;Evaluación Estratégica y Recomendación;1 ago. 2026 – 31 oct. 2026;0;Mejora Continua;Decisión y Escalamiento;1 nov. 2026 - 1 dic. 2026;0;22-01-2026;06-03-2026;06-03-2026;Hormigón
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
