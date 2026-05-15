@@ -1523,6 +1523,137 @@
           });
         })();
 
+        /* Carta Gantt: solo Actividades.csv (Proyecto, Actividades, Inicio, Fin). */
+        var GANTT_ACTIVIDADES = [];
+        var GANTT_PAGE_SIZE = 8;
+
+        function parseDMY(s) {
+          var t = (s || "").trim();
+          if (!t) return null;
+          var p = t.split("-");
+          if (p.length !== 3) return null;
+          var d = parseInt(p[0], 10);
+          var m = parseInt(p[1], 10) - 1;
+          var y = parseInt(p[2], 10);
+          if (isNaN(d) || isNaN(m) || isNaN(y)) return null;
+          return new Date(y, m, d);
+        }
+
+        function monthAbs(dt) {
+          if (!dt || isNaN(dt.getTime())) return null;
+          return dt.getFullYear() * 12 + dt.getMonth() - 2025 * 12;
+        }
+
+        function hashStr(s) {
+          var h = 0;
+          var str = s || "";
+          for (var i = 0; i < str.length; i++)
+            h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+          return h;
+        }
+
+        function parseActividadesCsv(text) {
+          var raw = (text || "").replace(/^\uFEFF/, "");
+          var lines = raw.split(/\r?\n/).filter(function (l) {
+            return l.replace(/\s/g, "") !== "";
+          });
+          if (lines.length < 2) return [];
+          var rows = [];
+          for (var li = 1; li < lines.length; li++) {
+            var parts = lines[li].split(";");
+            if (parts.length < 4) continue;
+            var proyecto = (parts[0] || "").trim();
+            if (!proyecto) continue;
+            rows.push({
+              proyecto: proyecto,
+              actividades: (parts[1] || "").trim(),
+              inicio: (parts[2] || "").trim(),
+              fin: (parts[3] || "").trim(),
+            });
+          }
+          return rows;
+        }
+
+        function ganttFromActivity(r) {
+          var di = parseDMY(r.inicio);
+          var df = parseDMY(r.fin) || di;
+          var a = monthAbs(di);
+          var b = monthAbs(df || di);
+          if (a === null && b === null) return null;
+          if (a === null) a = b;
+          if (b === null) b = a;
+          var lo = Math.min(a, b);
+          var hi = Math.max(a, b);
+          var len = Math.max(1, hi - lo + 1);
+          var tones = ["primary", "secondary", "tertiary"];
+          var tone = tones[Math.abs(hashStr(r.proyecto)) % 3];
+          var lab = (r.actividades || "").trim() || "Actividad";
+          return {
+            start: lo,
+            len: len,
+            label: lab.length > 36 ? lab.slice(0, 36) + "…" : lab,
+            tone: tone,
+          };
+        }
+
+        function buildGanttActividades(text) {
+          return parseActividadesCsv(text).map(function (r, i) {
+            return {
+              key: String(i + 1),
+              proyecto: r.proyecto,
+              actividades: r.actividades,
+              gantt: ganttFromActivity(r),
+            };
+          });
+        }
+
+        function filteredGantt() {
+          return GANTT_ACTIVIDADES.filter(function (a) {
+            if (!state.q) return true;
+            var qq = state.q.toLowerCase();
+            return (
+              a.proyecto.toLowerCase().indexOf(qq) !== -1 ||
+              (a.actividades || "").toLowerCase().indexOf(qq) !== -1
+            );
+          });
+        }
+
+        function sortedGantt(list) {
+          return list.slice().sort(function (a, b) {
+            var c = a.proyecto.localeCompare(b.proyecto, "es");
+            if (c) return c;
+            var sa = a.gantt ? a.gantt.start : 9999;
+            var sb = b.gantt ? b.gantt.start : 9999;
+            return sa - sb;
+          });
+        }
+
+        function loadActividadesGantt() {
+          fetch("Actividades.csv", { cache: "no-store" })
+            .then(function (r) {
+              if (!r.ok) throw new Error("csv");
+              return r.text();
+            })
+            .then(function (text) {
+              var built = buildGanttActividades(text);
+              if (built.length) {
+                GANTT_ACTIVIDADES = built;
+                state.ganttPage = 0;
+                renderGantt();
+                showToast(
+                  "Cronograma cargado desde Actividades.csv (" +
+                    built.length +
+                    " filas)",
+                );
+              }
+            })
+            .catch(function () {
+              showToast(
+                "No se pudo leer Actividades.csv; cronograma vacío.",
+              );
+            });
+        }
+
         function $(id) {
           return document.getElementById(id);
         }
@@ -1688,13 +1819,13 @@
         function renderGantt() {
           var root = $("gantt-hitos");
           if (!root) return;
-          var list = sorted(filtered());
+          var list = sortedGantt(filteredGantt());
           var total = list.length;
-          var ganttPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+          var ganttPages = Math.max(1, Math.ceil(total / GANTT_PAGE_SIZE));
           if (state.ganttPage >= ganttPages) state.ganttPage = ganttPages - 1;
           if (state.ganttPage < 0) state.ganttPage = 0;
-          var gStart = state.ganttPage * PAGE_SIZE;
-          var slice = list.slice(gStart, gStart + PAGE_SIZE);
+          var gStart = state.ganttPage * GANTT_PAGE_SIZE;
+          var slice = list.slice(gStart, gStart + GANTT_PAGE_SIZE);
 
           /* Solo año 2026: ene–dic (índices absolutos 12–24 desde ene-2025). */
           var VIEW_MONTHS = 12;
@@ -1747,17 +1878,17 @@
 
           var rows = slice.length
             ? slice
-                .map(function (p) {
-                  var g = p.gantt;
-                  var strike = p.inactivo ? " line-through opacity-75" : "";
+                .map(function (a) {
+                  var g = a.gantt;
                   var seg = g ? clipToGanttWindow(g) : null;
                   var barHtml = "";
                   if (seg) {
-                    var inactive =
-                      p.inactivo || seg.tone === "muted";
-                    var barTone = inactive
-                      ? "bg-slate-500 border border-slate-600 text-white"
-                      : "bg-primary border border-[#004a82] text-white shadow-sm";
+                    var barTone =
+                      seg.tone === "secondary"
+                        ? "bg-secondary border border-secondary text-on-secondary shadow-sm"
+                        : seg.tone === "tertiary"
+                          ? "bg-tertiary border border-tertiary text-on-tertiary shadow-sm"
+                          : "bg-primary border border-[#004a82] text-white shadow-sm";
                     var start = Math.max(
                       0,
                       Math.min(VIEW_MONTHS - 1, seg.start)
@@ -1776,7 +1907,7 @@
                       "%;width:" +
                       w +
                       '%" title="' +
-                      escapeHtml(seg.label) +
+                      escapeHtml(a.actividades || seg.label) +
                       '">' +
                       '<span class="text-[10px] font-semibold leading-tight truncate drop-shadow-sm">' +
                       escapeHtml(seg.label) +
@@ -1784,20 +1915,23 @@
                   } else {
                     barHtml =
                       '<div class="absolute inset-0 z-[2] flex items-center justify-center px-3 pointer-events-none">' +
-                      '<span class="text-label-md text-on-surface-variant">Sin hitos en 2026</span></div>';
+                      '<span class="text-label-md text-on-surface-variant">' +
+                      (g ? "Sin tramo en 2026" : "Sin fechas") +
+                      "</span></div>";
                   }
+                  var actTitle = a.actividades || "—";
                   return (
                     '<div class="flex items-stretch border-b border-outline-variant/60 hover:bg-surface-container-low/50">' +
                     '<div class="sticky left-0 z-20 w-[14rem] shrink-0 px-3 py-3 bg-surface-container-lowest border-r border-outline-variant flex flex-col justify-center shadow-[6px_0_14px_-8px_rgba(24,28,33,0.15)]">' +
-                    '<span class="text-label-md font-mono text-primary leading-none mb-1">' +
-                    escapeHtml(p.key) +
-                    "</span>" +
-                    '<span class="text-[13px] font-medium text-on-surface leading-snug' +
-                    strike +
-                    '" title="' +
-                    escapeHtml(p.proyecto) +
+                    '<span class="text-[11px] text-on-surface-variant leading-snug mb-1 line-clamp-2" title="' +
+                    escapeHtml(a.proyecto) +
                     '">' +
-                    escapeHtml(p.proyecto) +
+                    escapeHtml(a.proyecto) +
+                    "</span>" +
+                    '<span class="text-[13px] font-medium text-on-surface leading-snug line-clamp-2" title="' +
+                    escapeHtml(actTitle) +
+                    '">' +
+                    escapeHtml(actTitle) +
                     "</span></div>" +
                     '<div class="relative h-14 flex-1 min-w-[720px] bg-white" style="background-image: repeating-linear-gradient(90deg, transparent, transparent calc(' +
                     monthPct +
@@ -1814,12 +1948,12 @@
                   );
                 })
                 .join("")
-            : '<div class="px-4 py-10 text-body-md text-on-surface-variant text-center border-b border-outline-variant/40">Sin proyectos con los filtros actuales.</div>';
+            : '<div class="px-4 py-10 text-body-md text-on-surface-variant text-center border-b border-outline-variant/40">Sin actividades con los filtros actuales.</div>';
 
           var corner =
             '<div class="sticky left-0 z-30 w-[14rem] shrink-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col justify-center px-3 py-2.5 min-h-[4.5rem]">' +
-            '<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Proyecto</span>' +
-            '<span class="text-[10px] font-normal normal-case text-on-surface-variant/90 mt-1 leading-snug">Carta Gantt — solo año 2026</span></div>';
+            '<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Actividad</span>' +
+            '<span class="text-[10px] font-normal normal-case text-on-surface-variant/90 mt-1 leading-snug">Actividades.csv · año 2026</span></div>';
 
           root.innerHTML =
             '<div class="min-w-[960px]">' +
@@ -1839,7 +1973,7 @@
           if (gm) {
             if (total) {
               var ga = gStart + 1;
-              var gb = Math.min(gStart + PAGE_SIZE, total);
+              var gb = Math.min(gStart + GANTT_PAGE_SIZE, total);
               gm.textContent =
                 "Cronograma: filas " +
                 ga +
@@ -1847,10 +1981,10 @@
                 gb +
                 " de " +
                 total +
-                " proyectos";
+                " actividades";
             } else {
               gm.textContent =
-                "Cronograma: sin proyectos con los filtros actuales";
+                "Cronograma: sin actividades (cargue Actividades.csv)";
             }
           }
           if (gi) gi.textContent = state.ganttPage + 1 + " / " + ganttPages;
@@ -1963,6 +2097,7 @@
           });
 
         render();
+        loadActividadesGantt();
       })();
     </script>
     <!-- Footer decoration (Optional corporate feel) -->
